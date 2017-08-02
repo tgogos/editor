@@ -1,0 +1,3 @@
+html, body {height: 100%; position: relative;}
+
+ .CodeMirror {position: absolute !important; padding-top: 50px; top: 0;}
