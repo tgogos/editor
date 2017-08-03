@@ -1,4 +1,5 @@
 var cm = null; // codemirror
+var doc_str = null;
 
 $(document).ready(function(){
 
@@ -27,20 +28,28 @@ $(document).ready(function(){
 
 	// add button listeners
 	$(".btn-rm-cap-daseia-psili").on('click',function(event){
-		var doc_str = cm.getDoc().getValue();
-		doc_str = doc_str.replace(/Ἀ|Ἁ|ᾈ|ᾉ/g, "Α");
-		doc_str = doc_str.replace(/Ἐ|Ἑ/g,     "Ε");
-		doc_str = doc_str.replace(/Ἠ|Ἡ|ᾘ|ᾙ/g, "Η");
-		doc_str = doc_str.replace(/Ἰ|Ἱ/g,     "Ι");
-		doc_str = doc_str.replace(/Ὀ|Ὁ/g,     "Ο");
-		doc_str = doc_str.replace(/Ὑ/g,       "Υ"); // ypsilon can't take psili
-		doc_str = doc_str.replace(/Ὠ|Ὡ|ᾨ|ᾩ/g, "Ω");
+		doc_str = cm.getDoc().getValue();
+		doc_str = doc_str.replace(/Ἀ|Ἁ|ᾈ|ᾉ|ᾼ/g, "Α");
+		doc_str = doc_str.replace(/Ἐ|Ἑ/g,       "Ε");
+		doc_str = doc_str.replace(/Ἠ|Ἡ|ᾘ|ᾙ/g,   "Η");
+		doc_str = doc_str.replace(/Ἰ|Ἱ/g,       "Ι");
+		doc_str = doc_str.replace(/Ὀ|Ὁ/g,       "Ο");
+		doc_str = doc_str.replace(/Ὑ/g,         "Υ"); // ypsilon can't take psili
+		doc_str = doc_str.replace(/Ὠ|Ὡ|ᾨ|ᾩ/g,   "Ω");
+
+		doc_str = doc_str.replace(/ἀ|ἁ|ᾀ|ᾁ|ᾳ/g, "α");
+		doc_str = doc_str.replace(/ἐ|ἑ/g,       "ε");
+		doc_str = doc_str.replace(/ἠ|ἡ|ᾐ|ᾑ|ῃ/g, "η");
+		doc_str = doc_str.replace(/ἰ|ἱ/g,       "ι");
+		doc_str = doc_str.replace(/ὀ|ὁ/g,       "ο");
+		doc_str = doc_str.replace(/ὐ|ὑ/g,       "υ");
+		doc_str = doc_str.replace(/ὠ|ὡ|ᾠ|ᾡ/g,   "ω");
 		cm.getDoc().setValue(doc_str);
 
 	});
 
 	$(".btn-rp-cap-daseia-psili-tonos").on('click',function(event){
-		var doc_str = cm.getDoc().getValue();
+		doc_str = cm.getDoc().getValue();
 		doc_str = doc_str.replace(/Ἂ|Ἃ|Ἄ|Ἅ|Ἆ|Ἇ|ᾊ|ᾋ|ᾌ|ᾍ|ᾎ|ᾏ|Ὰ|Ά/g, "Ά");
 		doc_str = doc_str.replace(/Ἒ|Ἓ|Ἔ|Ἕ|Ὲ|Έ/g,                 "Έ");
 		doc_str = doc_str.replace(/Ἢ|Ἣ|Ἤ|Ἥ|Ἦ|Ἧ|ᾚ|ᾛ|ᾜ|ᾝ|ᾞ|ᾟ|Ὴ|Ή/g, "Ή");
@@ -48,6 +57,16 @@ $(document).ready(function(){
 		doc_str = doc_str.replace(/Ὂ|Ὃ|Ὄ|Ὅ|Ὸ|Ό/g,                 "Ό");
 		doc_str = doc_str.replace(/Ὓ|Ὕ|Ὗ|Ὺ|Ύ/g,                   "Ύ");
 		doc_str = doc_str.replace(/Ὢ|Ὣ|Ὤ|Ὥ|Ὦ|Ὧ|ᾪ|ᾫ|ᾬ|ᾭ|ᾮ|ᾯ|Ὼ|Ώ/g, "Ώ");
+
+		doc_str = doc_str.replace(/ἂ|ἃ|ἄ|ἅ|ἆ|ἇ|ὰ|ά|ᾂ|ᾃ|ᾄ|ᾅ|ᾆ|ᾇ|ᾲ|ᾴ|ᾶ|ᾷ/g, "ά");
+		doc_str = doc_str.replace(/ἒ|ἓ|ἔ|ἕ|ὲ|έ/g,                         "έ");
+		doc_str = doc_str.replace(/ἢ|ἣ|ἤ|ἥ|ἦ|ἧ|ὴ|ή|ᾒ|ᾓ|ᾔ|ᾕ|ᾖ|ᾗ|ῂ|ῄ|ῆ|ῇ/g, "ή");
+		doc_str = doc_str.replace(/ἲ|ἳ|ἴ|ἵ|ἶ|ἷ|ὶ|ί|ῖ/g,                   "ί");
+		doc_str = doc_str.replace(/ῒ|ΐ|ῗ/g,                               "ΐ");
+		doc_str = doc_str.replace(/ὂ|ὃ|ὄ|ὅ|ὸ|ό/g,                         "ό");
+		doc_str = doc_str.replace(/ὒ|ὓ|ὔ|ὕ|ὖ|ὗ|ὺ|ύ|ῦ/g,                   "ύ");
+		doc_str = doc_str.replace(/ῢ|ΰ|ῧ/g,                               "ΰ");
+		doc_str = doc_str.replace(/ὢ|ὣ|ὤ|ὥ|ὦ|ὧ|ὼ|ώ|ᾢ|ᾣ|ᾤ|ᾥ|ᾦ|ᾧ|ῲ|ῴ|ῶ|ῷ/g, "ώ");
 		cm.getDoc().setValue(doc_str);
 
 	});
