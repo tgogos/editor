@@ -67,6 +67,12 @@ $(document).ready(function(){
 		// 2-grams
 		doc_str = doc_str.replace(/(\n| |\,)άς(\n| |\,)/g, '$1ας$2');
 		doc_str = doc_str.replace(/(\n| |\,)Άς(\n| |\,)/g, '$1Ας$2');
+		doc_str = doc_str.replace(/(\n| |\,)γή(\n| |\,)/g, '$1γη$2');
+		doc_str = doc_str.replace(/(\n| |\,)Γή(\n| |\,)/g, '$1Γη$2');
+		doc_str = doc_str.replace(/(\n| |\,)δέ(\n| |\,)/g, '$1δε$2');
+		doc_str = doc_str.replace(/(\n| |\,)Δέ(\n| |\,)/g, '$1Δε$2');
+		doc_str = doc_str.replace(/(\n| |\,)ζώ(\n| |\,)/g, '$1ζω$2');
+		doc_str = doc_str.replace(/(\n| |\,)Ζώ(\n| |\,)/g, '$1Ζω$2');
 		doc_str = doc_str.replace(/(\n| |\,)θά(\n| |\,)/g, '$1θα$2');
 		doc_str = doc_str.replace(/(\n| |\,)Θά(\n| |\,)/g, '$1Θα$2');
 		doc_str = doc_str.replace(/(\n| |\,)θέ(\n| |\,)/g, '$1θε$2');
@@ -93,6 +99,8 @@ $(document).ready(function(){
 		// 3-grams
 		doc_str = doc_str.replace(/(\n| |\,)γιά(\n| |\,)/g, '$1για$2');
 		doc_str = doc_str.replace(/(\n| |\,)Γιά(\n| |\,)/g, '$1Για$2');
+		doc_str = doc_str.replace(/(\n| |\,)δέν(\n| |\,)/g, '$1δεν$2');
+		doc_str = doc_str.replace(/(\n| |\,)Δέν(\n| |\,)/g, '$1Δεν$2');
 		doc_str = doc_str.replace(/(\n| |\,)καί(\n| |\,)/g, '$1και$2');
 		doc_str = doc_str.replace(/(\n| |\,)Καί(\n| |\,)/g, '$1Και$2');
 		doc_str = doc_str.replace(/(\n| |\,)μάς(\n| |\,)/g, '$1μας$2');
@@ -104,8 +112,12 @@ $(document).ready(function(){
 		doc_str = doc_str.replace(/(\n| |\,)μού(\n| |\,)/g, '$1μου$2');
 		doc_str = doc_str.replace(/(\n| |\,)Μού(\n| |\,)/g, '$1Μου$2');
 		doc_str = doc_str.replace(/(\n| |\,)νού(\n| |\,)/g, '$1νου$2');
+		doc_str = doc_str.replace(/(\n| |\,)πιά(\n| |\,)/g, '$1πια$2');
+		doc_str = doc_str.replace(/(\n| |\,)Πιά(\n| |\,)/g, '$1Πια$2');
 		doc_str = doc_str.replace(/(\n| |\,)πού(\n| |\,)/g, '$1που$2');
 		doc_str = doc_str.replace(/(\n| |\,)Πού(\n| |\,)/g, '$1Που$2');
+		doc_str = doc_str.replace(/(\n| |\,)πώς(\n| |\,)/g, '$1πως$2');
+		doc_str = doc_str.replace(/(\n| |\,)Πώς(\n| |\,)/g, '$1Πως$2');
 		doc_str = doc_str.replace(/(\n| |\,)σάς(\n| |\,)/g, '$1σας$2');
 		doc_str = doc_str.replace(/(\n| |\,)Σάς(\n| |\,)/g, '$1Σας$2');
 		doc_str = doc_str.replace(/(\n| |\,)σάν(\n| |\,)/g, '$1σαν$2');
@@ -118,12 +130,16 @@ $(document).ready(function(){
 		doc_str = doc_str.replace(/(\n| |\,)Στό(\n| |\,)/g, '$1Στο$2');
 		doc_str = doc_str.replace(/(\n| |\,)τήν(\n| |\,)/g, '$1την$2');
 		doc_str = doc_str.replace(/(\n| |\,)Τήν(\n| |\,)/g, '$1Την$2');
+		doc_str = doc_str.replace(/(\n| |\,)τής(\n| |\,)/g, '$1της$2');
+		doc_str = doc_str.replace(/(\n| |\,)Τής(\n| |\,)/g, '$1Της$2');
 		doc_str = doc_str.replace(/(\n| |\,)τίς(\n| |\,)/g, '$1τις$2');
 		doc_str = doc_str.replace(/(\n| |\,)Τίς(\n| |\,)/g, '$1Τις$2');
 		doc_str = doc_str.replace(/(\n| |\,)τόν(\n| |\,)/g, '$1τον$2');
 		doc_str = doc_str.replace(/(\n| |\,)Τόν(\n| |\,)/g, '$1Τον$2');
 		doc_str = doc_str.replace(/(\n| |\,)τού(\n| |\,)/g, '$1του$2');
 		doc_str = doc_str.replace(/(\n| |\,)Τού(\n| |\,)/g, '$1Του$2');
+		doc_str = doc_str.replace(/(\n| |\,)τών(\n| |\,)/g, '$1των$2');
+		doc_str = doc_str.replace(/(\n| |\,)Τών(\n| |\,)/g, '$1Των$2');
 		doc_str = doc_str.replace(/(\n| |\,)φώς(\n| |\,)/g, '$1φως$2');
 		doc_str = doc_str.replace(/(\n| |\,)Φώς(\n| |\,)/g, '$1Φως$2');
 		
@@ -131,15 +147,28 @@ $(document).ready(function(){
 
 
 		// 4-grams
+		doc_str = doc_str.replace(/(\n| |\,)μιάν(\n| |\,)/g, '$1μιαν$2');
+		doc_str = doc_str.replace(/(\n| |\,)Μιάν(\n| |\,)/g, '$1Μιαν$2');
+		doc_str = doc_str.replace(/(\n| |\,)μιάς(\n| |\,)/g, '$1μιας$2');
+		doc_str = doc_str.replace(/(\n| |\,)Μιάς(\n| |\,)/g, '$1Μιας$2');
+		doc_str = doc_str.replace(/(\n| |\,)πρός(\n| |\,)/g, '$1προς$2');
+		doc_str = doc_str.replace(/(\n| |\,)Πρός(\n| |\,)/g, '$1Προς$2');
 		doc_str = doc_str.replace(/(\n| |\,)στήν(\n| |\,)/g, '$1στην$2');
 		doc_str = doc_str.replace(/(\n| |\,)Στήν(\n| |\,)/g, '$1Στην$2');
 		doc_str = doc_str.replace(/(\n| |\,)στής(\n| |\,)/g, '$1στης$2');
 		doc_str = doc_str.replace(/(\n| |\,)Στής(\n| |\,)/g, '$1Στης$2');
+		doc_str = doc_str.replace(/(\n| |\,)στίς(\n| |\,)/g, '$1στις$2');
+		doc_str = doc_str.replace(/(\n| |\,)Στίς(\n| |\,)/g, '$1Στις$2');
 		doc_str = doc_str.replace(/(\n| |\,)στόν(\n| |\,)/g, '$1στον$2');
 		doc_str = doc_str.replace(/(\n| |\,)Στόν(\n| |\,)/g, '$1Στον$2');
 		doc_str = doc_str.replace(/(\n| |\,)στού(\n| |\,)/g, '$1στου$2');
 		doc_str = doc_str.replace(/(\n| |\,)Στού(\n| |\,)/g, '$1Στου$2');
-		
+
+
+
+		// 5-grams
+		doc_str = doc_str.replace(/(\n| |\,)στούς(\n| |\,)/g, '$1στους$2');
+		doc_str = doc_str.replace(/(\n| |\,)Στούς(\n| |\,)/g, '$1Στους$2');
 				
 		
 		cm.getDoc().setValue(doc_str);
