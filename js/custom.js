@@ -111,7 +111,10 @@ $(document).ready(function(){
 		doc_str = doc_str.replace(/(\n| |\,)Μιά(\n| |\,)/g, '$1Μια$2');
 		doc_str = doc_str.replace(/(\n| |\,)μού(\n| |\,)/g, '$1μου$2');
 		doc_str = doc_str.replace(/(\n| |\,)Μού(\n| |\,)/g, '$1Μου$2');
+		doc_str = doc_str.replace(/(\n| |\,)ναί(\n| |\,)/g, '$1ναι$2');
+		doc_str = doc_str.replace(/(\n| |\,)Ναί(\n| |\,)/g, '$1Ναι$2');
 		doc_str = doc_str.replace(/(\n| |\,)νού(\n| |\,)/g, '$1νου$2');
+		doc_str = doc_str.replace(/(\n| |\,)Νού(\n| |\,)/g, '$1Νου$2');
 		doc_str = doc_str.replace(/(\n| |\,)πιά(\n| |\,)/g, '$1πια$2');
 		doc_str = doc_str.replace(/(\n| |\,)Πιά(\n| |\,)/g, '$1Πια$2');
 		doc_str = doc_str.replace(/(\n| |\,)πού(\n| |\,)/g, '$1που$2');
@@ -174,9 +177,21 @@ $(document).ready(function(){
 		cm.getDoc().setValue(doc_str);
 
 	});
+
+
+
+
+	$(".btn-fix-single-quotes").on('click',function(event){
+		doc_str = cm.getDoc().getValue();
+		doc_str = doc_str.replace(/\᾿/g, '\'');
+		cm.getDoc().setValue(doc_str);
+
+	});
+
+
 	
 });
 
-//      μού στά σάν τό άς στόν γιά 
+
 
 // .match(/[\u0370-\u03FF]|[0-9]| |\n|\(|\)|\-|\,|'|\./g)
