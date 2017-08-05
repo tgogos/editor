@@ -1,5 +1,8 @@
 var cm = null; // codemirror
 var doc_str = null;
+var greek_extended_markers = [];
+var mark_greek_extended = true;
+
 
 $(document).ready(function(){
 
@@ -16,6 +19,7 @@ $(document).ready(function(){
 
 	// add button listeners
 	$(".btn-rp-daseia-psili").on('click',function(event){
+		event.preventDefault();
 		doc_str = cm.getDoc().getValue();
 		doc_str = doc_str.replace(/Ἀ|Ἁ|ᾈ|ᾉ|ᾼ/g, "Α");
 		doc_str = doc_str.replace(/Ἐ|Ἑ/g,       "Ε");
@@ -37,6 +41,7 @@ $(document).ready(function(){
 	});
 
 	$(".btn-rp-daseia-psili-tonos").on('click',function(event){
+		event.preventDefault();
 		doc_str = cm.getDoc().getValue();
 		doc_str = doc_str.replace(/Ἂ|Ἃ|Ἄ|Ἅ|Ἆ|Ἇ|ᾊ|ᾋ|ᾌ|ᾍ|ᾎ|ᾏ|Ὰ|Ά/g, "Ά");
 		doc_str = doc_str.replace(/Ἒ|Ἓ|Ἔ|Ἕ|Ὲ|Έ/g,                 "Έ");
@@ -61,6 +66,7 @@ $(document).ready(function(){
 
 
 	$(".btn-rp-n-grams").on('click',function(event){
+		event.preventDefault();
 		doc_str = cm.getDoc().getValue();
 
 
@@ -192,6 +198,7 @@ $(document).ready(function(){
 
 
 	$(".btn-fix-single-quotes").on('click',function(event){
+		event.preventDefault();
 		doc_str = cm.getDoc().getValue();
 		doc_str = doc_str.replace(/\᾿|\’|\‘|\᾽/g, '\'');
 		cm.getDoc().setValue(doc_str);
@@ -199,9 +206,90 @@ $(document).ready(function(){
 	});
 
 
+	$(".btn-mark-greek-ext").on('click',function(event){
+		event.preventDefault();
+		event.stopPropagation();
+		// var checkBox = $(".btn-mark-greek-ext input");
+		// checkBox.prop("checked", !checkBox.prop("checked"));
+		$(".btn-mark-greek-ext input").trigger('click');
+
+	});
+
+
+	$(".btn-mark-greek-ext input").on('click',function(event){
+		event.stopPropagation();
+	});
+
+	$(".btn-mark-greek-ext input").change( function(event){
+		// event.preventDefault();
+		event.stopPropagation();
+		mark_greek_extended = this.checked;
+		if (mark_greek_extended) {
+			mark_greek_extended_text();
+			mark_greek_coptic_text();
+		}
+	});
+
 	
 });
 
 
 
 // .match(/[\u0370-\u03FF]|[0-9]| |\n|\(|\)|\-|\,|'|\./g)
+
+
+function clear_greek_extended_markers() {
+	greek_extended_markers.forEach(marker => marker.clear());
+}
+
+
+function mark_greek_extended_text() {
+	// markers.push(cm.markText(…));
+	doc_str = cm.getDoc().getValue();
+	var lines = doc_str.split('\n');
+	var char = '';
+
+	for (var i=0; i<lines.length; i++) {
+		for (var j=0; j<lines[i].length; j++) {
+			if (lines[i][j].match(/[\u1F00-\u1FFF]/g) != null) {
+				//console.log();
+				greek_extended_markers.push(cm.markText({
+					line: i,
+					ch: j
+					}, {
+					line: i,
+					ch: (j+1)
+					}, {
+					css: "background-color : #fff34f"
+					}));
+			}
+		}
+	}
+}
+
+
+function mark_greek_coptic_text() {
+	// markers.push(cm.markText(…));
+	doc_str = cm.getDoc().getValue();
+	var lines = doc_str.split('\n');
+	var char = '';
+
+	for (var i=0; i<lines.length; i++) {
+		for (var j=0; j<lines[i].length; j++) {
+			if (lines[i][j].match(/[\u0370-\u03FF]/g) != null) {
+				//console.log();
+				greek_extended_markers.push(cm.markText({
+					line: i,
+					ch: j
+					}, {
+					line: i,
+					ch: (j+1)
+					}, {
+					css: "background-color : #a9e287"
+					}));
+			}
+		}
+	}
+}
+
+
