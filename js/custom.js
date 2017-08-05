@@ -3,19 +3,29 @@ var doc_str = null;
 var greek_extended_markers = [];
 var mark_greek_extended = true;
 
+var greek_coptic_markers = [];
+var mark_greek_coptic = true;
+
 
 $(document).ready(function(){
 
 	cm = CodeMirror(document.body,{
 		theme:"monokai",
-		lineNumbers: true
+		lineNumbers: true,
 	});
 
 	cm.setSize("100%", "100%");
-	cm.getDoc().setValue(
-`
-`
-);
+	cm.getDoc().setValue('\n');
+	cm.on('change',function(){
+		if (mark_greek_extended) {
+			clear_greek_extended_markers();
+			mark_greek_extended_text();
+		}
+		if (mark_greek_coptic) {
+			clear_greek_coptic_markers();
+			mark_greek_coptic_text();
+		}
+	});
 
 	// add button listeners
 	$(".btn-rp-daseia-psili").on('click',function(event){
@@ -226,8 +236,33 @@ $(document).ready(function(){
 		mark_greek_extended = this.checked;
 		if (mark_greek_extended) {
 			mark_greek_extended_text();
-			mark_greek_coptic_text();
 		}
+	});
+
+
+
+	$(".btn-mark-greek-coptic").on('click',function(event){
+		event.preventDefault();
+		event.stopPropagation();
+		// var checkBox = $(".btn-mark-greek-coptic input");
+		// checkBox.prop("checked", !checkBox.prop("checked"));
+		$(".btn-mark-greek-coptic input").trigger('click');
+
+	});
+
+
+	$(".btn-mark-greek-coptic input").on('click',function(event){
+		event.stopPropagation();
+	});
+
+	$(".btn-mark-greek-coptic input").change( function(event){
+		// event.preventDefault();
+		event.stopPropagation();
+		mark_greek_coptic = this.checked;
+		if (mark_greek_coptic) {
+			mark_greek_coptic_text();
+		} else clear_greek_coptic_markers();
+
 	});
 
 	
@@ -237,13 +272,22 @@ $(document).ready(function(){
 
 // .match(/[\u0370-\u03FF]|[0-9]| |\n|\(|\)|\-|\,|'|\./g)
 
+cm_changed = function(){
+	console.log("cm_changed");
+};
+
 
 function clear_greek_extended_markers() {
 	greek_extended_markers.forEach(marker => marker.clear());
 }
 
+function clear_greek_coptic_markers() {
+	greek_coptic_markers.forEach(marker => marker.clear());
+}
+
 
 function mark_greek_extended_text() {
+	console.log("mark_greek_extended was called...");
 	// markers.push(cm.markText(…));
 	doc_str = cm.getDoc().getValue();
 	var lines = doc_str.split('\n');
