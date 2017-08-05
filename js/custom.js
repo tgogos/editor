@@ -6,6 +6,9 @@ var mark_greek_extended = true;
 var greek_coptic_markers = [];
 var mark_greek_coptic = true;
 
+var latin_red_markers = [];
+var mark_latin_red = true;
+
 
 $(document).ready(function(){
 
@@ -24,6 +27,10 @@ $(document).ready(function(){
 		if (mark_greek_coptic) {
 			clear_greek_coptic_markers();
 			mark_greek_coptic_text();
+		}
+		if (mark_latin_red) {
+			clear_latin_red_markers();
+			mark_latin_text_red();
 		}
 	});
 
@@ -216,6 +223,10 @@ $(document).ready(function(){
 	});
 
 
+
+
+
+
 	$(".btn-mark-greek-ext").on('click',function(event){
 		event.preventDefault();
 		event.stopPropagation();
@@ -224,20 +235,21 @@ $(document).ready(function(){
 		$(".btn-mark-greek-ext input").trigger('click');
 
 	});
-
-
 	$(".btn-mark-greek-ext input").on('click',function(event){
 		event.stopPropagation();
 	});
-
 	$(".btn-mark-greek-ext input").change( function(event){
 		// event.preventDefault();
 		event.stopPropagation();
 		mark_greek_extended = this.checked;
 		if (mark_greek_extended) {
 			mark_greek_extended_text();
+		} else {
+			clear_greek_extended_markers();
 		}
 	});
+
+
 
 
 
@@ -249,32 +261,50 @@ $(document).ready(function(){
 		$(".btn-mark-greek-coptic input").trigger('click');
 
 	});
-
-
 	$(".btn-mark-greek-coptic input").on('click',function(event){
 		event.stopPropagation();
 	});
-
 	$(".btn-mark-greek-coptic input").change( function(event){
 		// event.preventDefault();
 		event.stopPropagation();
 		mark_greek_coptic = this.checked;
 		if (mark_greek_coptic) {
 			mark_greek_coptic_text();
-		} else clear_greek_coptic_markers();
+		} else {
+			clear_greek_coptic_markers();
+		}
 
 	});
 
-	
+
+
+
+
+
+	$(".btn-mark-latin-red").on('click',function(event){
+		event.preventDefault();
+		event.stopPropagation();
+		$(".btn-mark-latin-red input").trigger('click');
+
+	});
+	$(".btn-mark-latin-red input").on('click',function(event){
+		event.stopPropagation();
+	});
+	$(".btn-mark-latin-red input").change( function(event){
+		event.stopPropagation();
+		mark_latin_red = this.checked;
+		if (mark_latin_red) {
+			mark_latin_text_red();
+		} else {
+			clear_latin_red_markers();
+		}
+
+	});
 });
 
 
 
 // .match(/[\u0370-\u03FF]|[0-9]| |\n|\(|\)|\-|\,|'|\./g)
-
-cm_changed = function(){
-	console.log("cm_changed");
-};
 
 
 function clear_greek_extended_markers() {
@@ -285,27 +315,32 @@ function clear_greek_coptic_markers() {
 	greek_coptic_markers.forEach(marker => marker.clear());
 }
 
+function clear_latin_red_markers() {
+	latin_red_markers.forEach(marker => marker.clear());
+}
+
 
 function mark_greek_extended_text() {
-	console.log("mark_greek_extended was called...");
-	// markers.push(cm.markText(…));
+	// console.log("mark_greek_extended was called...");
 	doc_str = cm.getDoc().getValue();
 	var lines = doc_str.split('\n');
-	var char = '';
+	var from = {line:0,ch:0};
+	var to   = {line:0,ch:0};
+	var start_new_mark = true;
 
 	for (var i=0; i<lines.length; i++) {
 		for (var j=0; j<lines[i].length; j++) {
+			if (start_new_mark) {
+				from.line = i;
+				from.ch   = j;
+			}
 			if (lines[i][j].match(/[\u1F00-\u1FFF]/g) != null) {
-				//console.log();
-				greek_extended_markers.push(cm.markText({
-					line: i,
-					ch: j
-					}, {
-					line: i,
-					ch: (j+1)
-					}, {
-					css: "background-color : #fff34f"
-					}));
+				to.line = i;
+				to.ch   = j+1;
+				start_new_mark = false;
+			} else {
+				greek_extended_markers.push(cm.markText(from,to,{className: "gr-ext"}));
+				start_new_mark = true;
 			}
 		}
 	}
@@ -313,24 +348,51 @@ function mark_greek_extended_text() {
 
 
 function mark_greek_coptic_text() {
-	// markers.push(cm.markText(…));
 	doc_str = cm.getDoc().getValue();
 	var lines = doc_str.split('\n');
-	var char = '';
+	var from = {line:0,ch:0};
+	var to   = {line:0,ch:0};
+	var start_new_mark = true;
 
 	for (var i=0; i<lines.length; i++) {
 		for (var j=0; j<lines[i].length; j++) {
+			if (start_new_mark) {
+				from.line = i;
+				from.ch   = j;
+			}
 			if (lines[i][j].match(/[\u0370-\u03FF]/g) != null) {
-				//console.log();
-				greek_extended_markers.push(cm.markText({
-					line: i,
-					ch: j
-					}, {
-					line: i,
-					ch: (j+1)
-					}, {
-					css: "background-color : #a9e287"
-					}));
+				to.line = i;
+				to.ch   = j+1;
+				start_new_mark = false;
+			} else {
+				greek_coptic_markers.push(cm.markText(from,to,{className: "gr-coptic"}));
+				start_new_mark = true;
+			}
+		}
+	}
+}
+
+
+function mark_latin_text_red() {
+	doc_str = cm.getDoc().getValue();
+	var lines = doc_str.split('\n');
+	var from = {line:0,ch:0};
+	var to   = {line:0,ch:0};
+	var start_new_mark = true;
+
+	for (var i=0; i<lines.length; i++) {
+		for (var j=0; j<lines[i].length; j++) {
+			if (start_new_mark) {
+				from.line = i;
+				from.ch   = j;
+			}
+			if (lines[i][j].match(/[\u003C-\u007F]/g) != null) {
+				to.line = i;
+				to.ch   = j+1;
+				start_new_mark = false;
+			} else {
+				latin_red_markers.push(cm.markText(from,to,{className: "latin-red"}));
+				start_new_mark = true;
 			}
 		}
 	}
