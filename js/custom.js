@@ -448,7 +448,7 @@ function mark_punctuation_text() {
 				from.line = i;
 				from.ch   = j;
 			}
-			if (lines[i][j].match(/\.|\,|\'| |…/g) != null) {
+			if (lines[i][j].match(/\.|\,|\'| |…|:|;|;|!|«|»/g) != null) {
 				to.line = i;
 				to.ch   = j+1;
 				start_new_mark = false;
