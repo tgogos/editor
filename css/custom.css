@@ -4,11 +4,17 @@ html, body {height: 100%; position: relative;}
 .gr-ext {background-color: #fff34f;}
 .gr-coptic {background-color: #a9e287;}
 .latin-red {background-color: #f3435b;}
+.punctuation {background-color: #dbf5cb;}
+
+.btn-mark-greek-coptic:before,
+.btn-mark-greek-ext:before,
+.btn-mark-latin-red:before,
+.btn-mark-punctuation:before {content: ' '; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background-color: #a9e287;}
 
 .btn-mark-greek-coptic {position: relative;}
-.btn-mark-greek-coptic:before, .btn-mark-greek-ext:before, .btn-mark-latin-red:before {content: ' '; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background-color: #a9e287;}
-
 .btn-mark-greek-ext {position: relative;}
 .btn-mark-greek-ext:before {background-color: #fff34f;}
 .btn-mark-latin-red {position: relative;}
 .btn-mark-latin-red:before {background-color: #f3435b;}
+.btn-mark-punctuation {position: relative;}
+.btn-mark-punctuation:before {background-color: #dbf5cb;}

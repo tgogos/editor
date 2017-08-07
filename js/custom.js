@@ -9,6 +9,9 @@ var mark_greek_coptic = true;
 var latin_red_markers = [];
 var mark_latin_red = true;
 
+var punctuation_markers = [];
+var mark_punctuation = true;
+
 
 $(document).ready(function(){
 
@@ -31,6 +34,10 @@ $(document).ready(function(){
 		if (mark_latin_red) {
 			clear_latin_red_markers();
 			mark_latin_text_red();
+		}
+		if (mark_punctuation) {
+			clear_punctuation_markers();
+			mark_punctuation_text();
 		}
 	});
 
@@ -225,7 +232,7 @@ $(document).ready(function(){
 
 
 
-
+	// mark greek extended
 
 	$(".btn-mark-greek-ext").on('click',function(event){
 		event.preventDefault();
@@ -252,6 +259,7 @@ $(document).ready(function(){
 
 
 
+	// mark greek
 
 	$(".btn-mark-greek-coptic").on('click',function(event){
 		event.preventDefault();
@@ -279,7 +287,7 @@ $(document).ready(function(){
 
 
 
-
+	// mark basic-latin 
 
 	$(".btn-mark-latin-red").on('click',function(event){
 		event.preventDefault();
@@ -300,6 +308,30 @@ $(document).ready(function(){
 		}
 
 	});
+
+
+
+	// mark punctuation
+
+	$(".btn-mark-punctuation").on('click',function(event){
+		event.preventDefault();
+		event.stopPropagation();
+		$(".btn-mark-punctuation input").trigger('click');
+
+	});
+	$(".btn-mark-punctuation input").on('click',function(event){
+		event.stopPropagation();
+	});
+	$(".btn-mark-punctuation input").change( function(event){
+		event.stopPropagation();
+		mark_punctuation = this.checked;
+		if (mark_punctuation) {
+			mark_punctuation_text();
+		} else {
+			clear_punctuation_markers();
+		}
+
+	});
 });
 
 
@@ -317,6 +349,10 @@ function clear_greek_coptic_markers() {
 
 function clear_latin_red_markers() {
 	latin_red_markers.forEach(marker => marker.clear());
+}
+
+function clear_punctuation_markers() {
+	punctuation_markers.forEach(marker => marker.clear());
 }
 
 
@@ -399,3 +435,27 @@ function mark_latin_text_red() {
 }
 
 
+function mark_punctuation_text() {
+	doc_str = cm.getDoc().getValue();
+	var lines = doc_str.split('\n');
+	var from = {line:0,ch:0};
+	var to   = {line:0,ch:0};
+	var start_new_mark = true;
+
+	for (var i=0; i<lines.length; i++) {
+		for (var j=0; j<lines[i].length; j++) {
+			if (start_new_mark) {
+				from.line = i;
+				from.ch   = j;
+			}
+			if (lines[i][j].match(/\.|\,|\'| |…/g) != null) {
+				to.line = i;
+				to.ch   = j+1;
+				start_new_mark = false;
+			} else {
+				punctuation_markers.push(cm.markText(from,to,{className: "punctuation"}));
+				start_new_mark = true;
+			}
+		}
+	}
+}
