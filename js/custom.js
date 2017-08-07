@@ -109,6 +109,8 @@ $(document).ready(function(){
 		doc_str = doc_str.replace(/(\n| |\,)Θά(\n| |\,)/g, '$1Θα$2');
 		doc_str = doc_str.replace(/(\n| |\,)θέ(\n| |\,)/g, '$1θε$2');
 		doc_str = doc_str.replace(/(\n| |\,)Θέ(\n| |\,)/g, '$1Θε$2');
+		doc_str = doc_str.replace(/(\n| |\,)μά(\n| |\,)/g, '$1μα$2');
+		doc_str = doc_str.replace(/(\n| |\,)Μά(\n| |\,)/g, '$1Μα$2');
 		doc_str = doc_str.replace(/(\n| |\,)μέ(\n| |\,)/g, '$1με$2');
 		doc_str = doc_str.replace(/(\n| |\,)Μέ(\n| |\,)/g, '$1Με$2');
 		doc_str = doc_str.replace(/(\n| |\,)μή(\n| |\,)/g, '$1μη$2');
@@ -123,6 +125,8 @@ $(document).ready(function(){
 		doc_str = doc_str.replace(/(\n| |\,)Τά(\n| |\,)/g, '$1Τα$2');
 		doc_str = doc_str.replace(/(\n| |\,)τή(\n| |\,)/g, '$1τη$2');
 		doc_str = doc_str.replace(/(\n| |\,)Τή(\n| |\,)/g, '$1Τη$2');
+		doc_str = doc_str.replace(/(\n| |\,)τί(\n| |\,)/g, '$1τι$2');
+		doc_str = doc_str.replace(/(\n| |\,)Τί(\n| |\,)/g, '$1Τι$2');
 		doc_str = doc_str.replace(/(\n| |\,)τό(\n| |\,)/g, '$1το$2');
 		doc_str = doc_str.replace(/(\n| |\,)Τό(\n| |\,)/g, '$1Το$2');
 		doc_str = doc_str.replace(/(\n| |\,)ώς(\n| |\,)/g, '$1ως$2');
