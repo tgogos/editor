@@ -159,6 +159,8 @@ $(document).ready(function(){
 		doc_str = doc_str.replace(/(\n| |\,)Νού(\n| |\,)/g, '$1Νου$2');
 		doc_str = doc_str.replace(/(\n| |\,)πιά(\n| |\,)/g, '$1πια$2');
 		doc_str = doc_str.replace(/(\n| |\,)Πιά(\n| |\,)/g, '$1Πια$2');
+		doc_str = doc_str.replace(/(\n| |\,)πιό(\n| |\,)/g, '$1πιο$2');
+		doc_str = doc_str.replace(/(\n| |\,)Πιό(\n| |\,)/g, '$1Πιο$2');
 		doc_str = doc_str.replace(/(\n| |\,)πού(\n| |\,)/g, '$1που$2');
 		doc_str = doc_str.replace(/(\n| |\,)Πού(\n| |\,)/g, '$1Που$2');
 		doc_str = doc_str.replace(/(\n| |\,)πώς(\n| |\,)/g, '$1πως$2');
@@ -167,6 +169,8 @@ $(document).ready(function(){
 		doc_str = doc_str.replace(/(\n| |\,)Σάς(\n| |\,)/g, '$1Σας$2');
 		doc_str = doc_str.replace(/(\n| |\,)σάν(\n| |\,)/g, '$1σαν$2');
 		doc_str = doc_str.replace(/(\n| |\,)Σάν(\n| |\,)/g, '$1Σαν$2');
+		doc_str = doc_str.replace(/(\n| |\,)σού(\n| |\,)/g, '$1σου$2');
+		doc_str = doc_str.replace(/(\n| |\,)Σού(\n| |\,)/g, '$1Σου$2');
 		doc_str = doc_str.replace(/(\n| |\,)στά(\n| |\,)/g, '$1στα$2');
 		doc_str = doc_str.replace(/(\n| |\,)Στά(\n| |\,)/g, '$1Στα$2');
 		doc_str = doc_str.replace(/(\n| |\,)στή(\n| |\,)/g, '$1στη$2');
