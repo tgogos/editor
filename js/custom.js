@@ -117,6 +117,8 @@ $(document).ready(function(){
 		doc_str = doc_str.replace(/(\n| |\,)Μή(\n| |\,)/g, '$1Μη$2');
 		doc_str = doc_str.replace(/(\n| |\,)νά(\n| |\,)/g, '$1να$2');
 		doc_str = doc_str.replace(/(\n| |\,)Νά(\n| |\,)/g, '$1Να$2');
+		doc_str = doc_str.replace(/(\n| |\,)πώ(\n| |\,)/g, '$1πω$2');
+		doc_str = doc_str.replace(/(\n| |\,)Πώ(\n| |\,)/g, '$1Πω$2');
 		doc_str = doc_str.replace(/(\n| |\,)σέ(\n| |\,)/g, '$1σε$2');
 		doc_str = doc_str.replace(/(\n| |\,)Σέ(\n| |\,)/g, '$1Σε$2');
 		doc_str = doc_str.replace(/(\n| |\,)σύ(\n| |\,)/g, '$1συ$2');
@@ -137,6 +139,8 @@ $(document).ready(function(){
 		// 3-grams
 		doc_str = doc_str.replace(/(\n| |\,)γιά(\n| |\,)/g, '$1για$2');
 		doc_str = doc_str.replace(/(\n| |\,)Γιά(\n| |\,)/g, '$1Για$2');
+		doc_str = doc_str.replace(/(\n| |\,)γής(\n| |\,)/g, '$1γης$2');
+		doc_str = doc_str.replace(/(\n| |\,)Γής(\n| |\,)/g, '$1Γης$2');
 		doc_str = doc_str.replace(/(\n| |\,)δέν(\n| |\,)/g, '$1δεν$2');
 		doc_str = doc_str.replace(/(\n| |\,)Δέν(\n| |\,)/g, '$1Δεν$2');
 		doc_str = doc_str.replace(/(\n| |\,)δές(\n| |\,)/g, '$1δες$2');
@@ -456,7 +460,7 @@ function mark_punctuation_text() {
 				from.line = i;
 				from.ch   = j;
 			}
-			if (lines[i][j].match(/\.|\,|\'| |…|:|;|;|!|«|»/g) != null) {
+			if (lines[i][j].match(/\.|\,|\'| |…|:|;|;|!|«|»|-/g) != null) {
 				to.line = i;
 				to.ch   = j+1;
 				start_new_mark = false;
