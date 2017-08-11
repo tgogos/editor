@@ -9,6 +9,9 @@ var mark_greek_coptic = true;
 var latin_red_markers = [];
 var mark_latin_red = true;
 
+var unwanted_markers = [];
+var mark_unwanted = true;
+
 var punctuation_markers = [];
 var mark_punctuation = true;
 
@@ -38,6 +41,10 @@ $(document).ready(function(){
 		if (mark_punctuation) {
 			clear_punctuation_markers();
 			mark_punctuation_text();
+		}
+		if (mark_unwanted) {
+			clear_unwanted_markers();
+			mark_unwanted_text();
 		}
 	});
 
@@ -244,6 +251,17 @@ $(document).ready(function(){
 
 
 
+	$(".btn-fix-micro-sign").on('click',function(event){
+		event.preventDefault();
+		doc_str = cm.getDoc().getValue();
+		doc_str = doc_str.replace(/µ/g, 'μ');
+		cm.getDoc().setValue(doc_str);
+
+	});
+
+
+
+
 	// mark greek extended
 
 	$(".btn-mark-greek-ext").on('click',function(event){
@@ -323,6 +341,33 @@ $(document).ready(function(){
 
 
 
+
+
+	// mark unwanted 
+
+	$(".btn-mark-unwanted").on('click',function(event){
+		event.preventDefault();
+		event.stopPropagation();
+		$(".btn-mark-unwanted input").trigger('click');
+
+	});
+	$(".btn-mark-unwanted input").on('click',function(event){
+		event.stopPropagation();
+	});
+	$(".btn-mark-unwanted input").change( function(event){
+		event.stopPropagation();
+		mark_unwanted = this.checked;
+		if (mark_unwanted) {
+			mark_unwanted_text();
+		} else {
+			clear_unwanted_markers();
+		}
+
+	});
+
+
+
+
 	// mark punctuation
 
 	$(".btn-mark-punctuation").on('click',function(event){
@@ -361,6 +406,10 @@ function clear_greek_coptic_markers() {
 
 function clear_latin_red_markers() {
 	latin_red_markers.forEach(marker => marker.clear());
+}
+
+function clear_unwanted_markers() {
+	unwanted_markers.forEach(marker => marker.clear());
 }
 
 function clear_punctuation_markers() {
@@ -445,6 +494,36 @@ function mark_latin_text_red() {
 		}
 	}
 }
+
+
+
+
+function mark_unwanted_text() {
+	doc_str = cm.getDoc().getValue();
+	var lines = doc_str.split('\n');
+	var from = {line:0,ch:0};
+	var to   = {line:0,ch:0};
+	var start_new_mark = true;
+
+	for (var i=0; i<lines.length; i++) {
+		for (var j=0; j<lines[i].length; j++) {
+			if (start_new_mark) {
+				from.line = i;
+				from.ch   = j;
+			}
+			if (lines[i][j].match(/µ|᾿|\’|\‘|\᾽|\"|\/|\t|ι|῀|῁|῍|῎|῏|῭|΅|`|´|῾/g) != null) {
+				to.line = i;
+				to.ch   = j+1;
+				start_new_mark = false;
+			} else {
+				unwanted_markers.push(cm.markText(from,to,{className: "unwanted"}));
+				start_new_mark = true;
+			}
+		}
+	}
+}
+
+
 
 
 function mark_punctuation_text() {
