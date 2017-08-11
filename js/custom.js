@@ -519,7 +519,7 @@ function mark_unwanted_text() {
 				from.line = i;
 				from.ch   = j;
 			}
-			if (lines[i][j].match(/µ|᾿|\’|\‘|\᾽|\"|\/|\t|ι|῀|῁|῍|῎|῏|῭|΅|`|´|῾|˙/g) != null) {
+			if (lines[i][j].match(/µ|᾿|\’|\‘|\᾽|\"|\/|\t|ι|῀|῁|῍|῎|῏|῭|΅|`|´|῾|˙|“|”/g) != null) {
 				to.line = i;
 				to.ch   = j+1;
 				start_new_mark = false;
