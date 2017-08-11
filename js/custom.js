@@ -144,6 +144,8 @@ $(document).ready(function(){
 
 
 		// 3-grams
+		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)βρώ(\n| |\,|\.|\!|\;)/g, '$1βρω$2');
+		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)Βρώ(\n| |\,|\.|\!|\;)/g, '$1Βρω$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)γιά(\n| |\,|\.|\!|\;)/g, '$1για$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)Γιά(\n| |\,|\.|\!|\;)/g, '$1Για$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)γής(\n| |\,|\.|\!|\;)/g, '$1γης$2');
@@ -152,6 +154,8 @@ $(document).ready(function(){
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)Δέν(\n| |\,|\.|\!|\;)/g, '$1Δεν$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)δές(\n| |\,|\.|\!|\;)/g, '$1δες$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)Δές(\n| |\,|\.|\!|\;)/g, '$1Δες$2');
+		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)θές(\n| |\,|\.|\!|\;)/g, '$1θες$2');
+		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)Θές(\n| |\,|\.|\!|\;)/g, '$1Θες$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)καί(\n| |\,|\.|\!|\;)/g, '$1και$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)Καί(\n| |\,|\.|\!|\;)/g, '$1Και$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)μάς(\n| |\,|\.|\!|\;)/g, '$1μας$2');
@@ -207,6 +211,8 @@ $(document).ready(function(){
 
 
 		// 4-grams
+		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)βρές(\n| |\,|\.|\!|\;)/g, '$1βρες$2');
+		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)Βρές(\n| |\,|\.|\!|\;)/g, '$1Βρες$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)μιάν(\n| |\,|\.|\!|\;)/g, '$1μιαν$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)Μιάν(\n| |\,|\.|\!|\;)/g, '$1Μιαν$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)μιάς(\n| |\,|\.|\!|\;)/g, '$1μιας$2');
@@ -229,6 +235,8 @@ $(document).ready(function(){
 
 
 		// 5-grams
+		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)βρείς(\n| |\,|\.|\!|\;)/g, '$1βρεις$2');
+		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)Βρείς(\n| |\,|\.|\!|\;)/g, '$1Βρεις$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)στούς(\n| |\,|\.|\!|\;)/g, '$1στους$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)Στούς(\n| |\,|\.|\!|\;)/g, '$1Στους$2');
 				
