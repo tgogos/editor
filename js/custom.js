@@ -154,6 +154,8 @@ $(document).ready(function(){
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)Δέν(\n| |\,|\.|\!|\;)/g, '$1Δεν$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)δές(\n| |\,|\.|\!|\;)/g, '$1δες$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)Δές(\n| |\,|\.|\!|\;)/g, '$1Δες$2');
+		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)ζεί(\n| |\,|\.|\!|\;)/g, '$1ζει$2');
+		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)Ζεί(\n| |\,|\.|\!|\;)/g, '$1Ζει$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)θές(\n| |\,|\.|\!|\;)/g, '$1θες$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)Θές(\n| |\,|\.|\!|\;)/g, '$1Θες$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)καί(\n| |\,|\.|\!|\;)/g, '$1και$2');
