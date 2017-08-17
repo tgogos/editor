@@ -285,7 +285,8 @@ $(document).ready(function(){
 	$(".btn-fix-single-quotes").on('click',function(event){
 		event.preventDefault();
 		doc_str = cm.getDoc().getValue();
-		doc_str = doc_str.replace(/\᾿|\’|\‘|\᾽/g, '\'');
+		// doc_str = doc_str.replace(/\᾿|\’|\‘|\᾽/g, '\'');
+		doc_str = doc_str.replace(/\’|\‘|\᾽/g, '\'');
 		cm.getDoc().setValue(doc_str);
 
 	});
