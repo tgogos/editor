@@ -182,6 +182,8 @@ $(document).ready(function(){
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)Νού(\n| |\,|\.|\!|\;)/g, '$1Νου$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)πάς(\n| |\,|\.|\!|\;)/g, '$1πας$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)Πάς(\n| |\,|\.|\!|\;)/g, '$1Πας$2');
+		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)πεί(\n| |\,|\.|\!|\;)/g, '$1πει$2');
+		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)Πεί(\n| |\,|\.|\!|\;)/g, '$1Πει$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)πές(\n| |\,|\.|\!|\;)/g, '$1πες$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)Πές(\n| |\,|\.|\!|\;)/g, '$1Πες$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)πιά(\n| |\,|\.|\!|\;)/g, '$1πια$2');
@@ -237,6 +239,8 @@ $(document).ready(function(){
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)Μιάς(\n| |\,|\.|\!|\;)/g, '$1Μιας$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)νούς(\n| |\,|\.|\!|\;)/g, '$1νους$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)Νούς(\n| |\,|\.|\!|\;)/g, '$1Νους$2');
+		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)πείς(\n| |\,|\.|\!|\;)/g, '$1πεις$2');
+		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)Πείς(\n| |\,|\.|\!|\;)/g, '$1Πεις$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)πρίν(\n| |\,|\.|\!|\;)/g, '$1πριν$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)Πρίν(\n| |\,|\.|\!|\;)/g, '$1Πριν$2');
 		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)πρός(\n| |\,|\.|\!|\;)/g, '$1προς$2');
@@ -549,7 +553,27 @@ function mark_unwanted_text() {
 				from.line = i;
 				from.ch   = j;
 			}
-			if (lines[i][j].match(/µ|᾿|\’|\‘|\᾽|\"|\/|\t|ι|῀|῁|῍|῎|῏|῭|΅|`|´|῾|˙|“|”|΄/g) != null) {
+
+			// GREEK EXTENDED 
+			// ᾽ : U+1FBD Greek Koronis
+			// ι : U+1FBE Greek Prosgegrammeni
+			// ᾿ : U+1FBF Greek Psili
+			// ῀ : U+1FC0 Greek Perispomeni
+			// ῁ : U+1FC1 Greek Dialytika and Perispomeni
+			// ῍ : U+1FCD Greek Psili and Varia
+			// ῎ : U+1FCE Greek Psili and Oxia
+			// ῏ : U+1FCF Greek Psili and Perispomeni
+			// ῝ : U+1FDD Greek Dasia and Varia
+			// ῞ : U+1FDE Greek Dasia and Oxia
+			// ῟ : U+1FDF Greek Dasia and Perispomeni
+			// ῭ : U+1FED Greek Dialytika and Varia
+			// ΅ : U+1FEE Greek Dialytika and Oxia
+			// ` : U+1FEF Greek Varia
+			// ´ : U+1FFD Greek Oxia
+			// ῾ : U+1FFE Greek Dasia
+
+			
+			if (lines[i][j].match(/µ|᾿|\’|\‘|\᾽|\"|\/|\t|ι|῀|῁|῍|῎|῏|῝|῞|῟|῭|΅|`|´|῾|˙|“|”|΄/g) != null) {
 				to.line = i;
 				to.ch   = j+1;
 				start_new_mark = false;
