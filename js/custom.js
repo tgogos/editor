@@ -304,6 +304,16 @@ $(document).ready(function(){
 
 
 
+	$(".btn-fix-psili").on('click',function(event){
+		event.preventDefault();
+		doc_str = cm.getDoc().getValue();
+		doc_str = doc_str.replace(/᾿/g, '\'');
+		cm.getDoc().setValue(doc_str);
+
+	});
+
+
+
 
 	// mark greek extended
 
