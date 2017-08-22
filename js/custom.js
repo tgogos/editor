@@ -623,3 +623,15 @@ function mark_punctuation_text() {
 		}
 	}
 }
+
+// TO DO:
+// fix [diacritic]+[character] to one single character
+// (᾽) Greek Koronis, U+1FBD OR    
+// (᾿) Greek Psili: U+1FBF
+// .replace(/(᾽|᾿)Α/g, 'Ἀ'); // (Ἀ) Greek Capital Letter Alpha with Psili: U+1F08
+// .replace(/(᾽|᾿)Ε/g, 'Ἐ'); // (Ἐ) Greek Capital Letter Epsilon with Psili: U+1F18
+// .replace(/(᾽|᾿)Η/g, 'Ἠ'); // (Ἠ) Greek Capital Letter Eta with Psili: U+1F28
+// .replace(/(᾽|᾿)Ι/g, 'Ἰ'); // (Ἰ) Greek Capital Letter Iota with Psili: U+1F38
+// .replace(/(᾽|᾿)Ο/g, 'Ὀ'); // (Ὀ) Greek Capital Letter Omicron with Psili: U+1F48
+//                           //     Greek Capital Letter Upsilon with Psili does not exist
+// .replace(/(᾽|᾿)Ω/g, 'Ὠ'); // (Ὠ) Greek Capital Letter Omega with Psili: U+1F68
