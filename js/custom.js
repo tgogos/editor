@@ -286,7 +286,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		doc_str = cm.getDoc().getValue();
 		// doc_str = doc_str.replace(/\᾿|\’|\‘|\᾽/g, '\'');
-		doc_str = doc_str.replace(/\’|\‘|\᾽/g, '\'');
+		doc_str = doc_str.replace(/\’|\‘|\᾽|΄/g, '\'');
 		cm.getDoc().setValue(doc_str);
 
 	});
@@ -565,6 +565,23 @@ function mark_unwanted_text() {
 				from.ch   = j;
 			}
 
+			// CONTROL CHARACTERS
+			// \t : U+0009 Horizontal Tabulation
+
+			// BASIC LATIN
+			// " : U+0022 Quotation Mark
+			// / : U+002F Solidus
+
+			// LATIN-1 SUPPLEMENT
+			// µ : U+00B5 Micro Sign
+			// · : U+00B7 Middle Dot
+
+			// SPACING MODIFIER LETTERS
+			// ˙ : U+02D9 Dot Above
+
+			// GREEK AND COPTIC
+			// ΄ : U+0384 Greek Tonos
+
 			// GREEK EXTENDED 
 			// ᾽ : U+1FBD Greek Koronis
 			// ι : U+1FBE Greek Prosgegrammeni
@@ -583,8 +600,13 @@ function mark_unwanted_text() {
 			// ´ : U+1FFD Greek Oxia
 			// ῾ : U+1FFE Greek Dasia
 
-			
-			if (lines[i][j].match(/µ|᾿|\’|\‘|\᾽|\"|\/|\t|ι|῀|῁|῍|῎|῏|῝|῞|῟|῭|΅|`|´|῾|˙|“|”|΄/g) != null) {
+			// GENERAL PUNCTUATION
+			// ‘ : U+2018 Left Single Quotation Mark
+			// ’ : U+2019 Right Single Quotation Mark
+			// “ : U+201C Left Double Quotation Mark
+			// ” : U+201D Right Double Quotation Mark
+
+			if (lines[i][j].match(/\t|\"|\/|µ|·|˙|΄|᾽|ι|᾿|῀|῁|῍|῎|῏|῝|῞|῟|῭|΅|`|´|῾|\‘|\’|“|”/g) != null) {
 				to.line = i;
 				to.ch   = j+1;
 				start_new_mark = false;
