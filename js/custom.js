@@ -314,6 +314,92 @@ $(document).ready(function(){
 
 
 
+	$(".btn-fix-diacritics").on('click',function(event){
+		event.preventDefault();
+		doc_str = cm.getDoc().getValue();
+
+
+		// fix [diacritic]+[character] to one single character
+		// ===================================================
+
+		// Case:
+		// (᾽) Greek Koronis, U+1FBD OR    
+		// (᾿) Greek Psili: U+1FBF
+		
+		doc_str = doc_str.replace(/(᾽|᾿)Α/g, 'Ἀ')  // (Ἀ) Greek Capital Letter Alpha with Psili: U+1F08
+						 .replace(/(᾽|᾿)Ε/g, 'Ἐ')  // (Ἐ) Greek Capital Letter Epsilon with Psili: U+1F18
+						 .replace(/(᾽|᾿)Η/g, 'Ἠ')  // (Ἠ) Greek Capital Letter Eta with Psili: U+1F28
+						 .replace(/(᾽|᾿)Ι/g, 'Ἰ')  // (Ἰ) Greek Capital Letter Iota with Psili: U+1F38
+						 .replace(/(᾽|᾿)Ο/g, 'Ὀ')  // (Ὀ) Greek Capital Letter Omicron with Psili: U+1F48
+						                           //     Greek Capital Letter Upsilon with Psili does not exist
+						 .replace(/(᾽|᾿)Ω/g, 'Ὠ')  // (Ὠ) Greek Capital Letter Omega with Psili: U+1F68
+
+		// Case:
+		// (῍) Greek Psili and Varia: U+1FCD
+						 .replace(/῍Α/g, 'Ἂ')  // (Ἂ) Greek Capital Letter Alpha with Psili and Varia: U+1F0A
+						 .replace(/῍Ε/g, 'Ἒ')  // (Ἒ) Greek Capital Letter Epsilon with Psili and Varia: U+1F1A
+						 .replace(/῍Η/g, 'Ἢ')  // (Ἢ) Greek Capital Letter Eta with Psili and Varia: U+1F2A
+						 .replace(/῍Ι/g, 'Ἲ')  // (Ἲ) Greek Capital Letter Iota with Psili and Varia: U+1F3A
+						 .replace(/῍Ο/g, 'Ὂ')  // (Ὂ) Greek Capital Letter Omicron with Psili and Varia: U+1F4A
+						                       //     Greek Capital Letter Upsilon with Psili and Varia does not exist
+						 .replace(/῍Ω/g, 'Ὢ')  // (Ὢ) Greek Capital Letter Omega with Psili and Varia: U+1F6A
+
+		// Case:
+		// (῎) Greek Psili and Oxia: U+1FCE
+						 .replace(/῎Α/g, 'Ἄ')  // (Ἄ) Greek Capital Letter Alpha with Psili and Oxia: U+1F0C
+						 .replace(/῎Ε/g, 'Ἔ')  // (Ἔ) Greek Capital Letter Epsilon with Psili and Oxia: U+1F1C
+						 .replace(/῎Η/g, 'Ἤ')  // (Ἤ) Greek Capital Letter Eta with Psili and Oxia: U+1F2C
+						 .replace(/῎Ι/g, 'Ἴ')  // (Ἴ) Greek Capital Letter Iota with Psili and Oxia: U+1F3C
+						 .replace(/῎Ο/g, 'Ὄ')  // (Ὄ) Greek Capital Letter Omicron with Psili and Oxia: U+1F4C
+						                       //     Greek Capital Letter Upsilon with Psili and Oxia does not exist
+						 .replace(/῎Ω/g, 'Ὤ')  // (Ὤ) Greek Capital Letter Omega with Psili and Oxia: U+1F6C
+
+		// Case:
+		// (῏) Greek Psili and Perispomeni: U+1FCF
+						 .replace(/῏Α/g, 'Ἆ')  // (Ἆ) Greek Capital Letter Alpha with Psili and Perispomeni: U+1F0E
+						                       //     Greek Capital Letter Epsilon with Psili and Perispomeni does not exist
+						 .replace(/῏Η/g, 'Ἦ')  // (Ἦ) Greek Capital Letter Eta with Psili and Perispomeni: U+1F2E
+						 .replace(/῏Ι/g, 'Ἶ')  // (Ἶ) Greek Capital Letter Iota with Psili and Perispomeni: U+1F3E
+						                       //     Greek Capital Letter Omicron with Psili and Perispomeni does not exist
+						                       //     Greek Capital Letter Ypsilon with Psili and Perispomeni does not exist
+						 .replace(/῏Ω/g, 'Ὦ')  // (Ὦ) Greek Capital Letter Omega with Psili and Perispomeni: U+1F6E
+
+	 	// Case:
+		//
+						 .replace(/Α/g, '')  //
+						 .replace(/Ε/g, '')  //
+						 .replace(/Η/g, '')  //
+						 .replace(/Ι/g, '')  //
+						 .replace(/Ο/g, '')  //
+						 .replace(/Υ/g, '')  //
+						 .replace(/Ω/g, '')  //
+
+		// Case:
+		//
+						 .replace(/Α/g, '')  //
+						 .replace(/Ε/g, '')  //
+						 .replace(/Η/g, '')  //
+						 .replace(/Ι/g, '')  //
+						 .replace(/Ο/g, '')  //
+						 .replace(/Υ/g, '')  //
+						 .replace(/Ω/g, '')  //
+
+	 	// Case:
+		//
+						 .replace(/Α/g, '')  //
+						 .replace(/Ε/g, '')  //
+						 .replace(/Η/g, '')  //
+						 .replace(/Ι/g, '')  //
+						 .replace(/Ο/g, '')  //
+						 .replace(/Υ/g, '')  //
+						 .replace(/Ω/g, '')  //
+
+		cm.getDoc().setValue(doc_str);
+
+	});
+
+
+
 
 	// mark greek extended
 
@@ -645,15 +731,3 @@ function mark_punctuation_text() {
 		}
 	}
 }
-
-// TO DO:
-// fix [diacritic]+[character] to one single character
-// (᾽) Greek Koronis, U+1FBD OR    
-// (᾿) Greek Psili: U+1FBF
-// .replace(/(᾽|᾿)Α/g, 'Ἀ'); // (Ἀ) Greek Capital Letter Alpha with Psili: U+1F08
-// .replace(/(᾽|᾿)Ε/g, 'Ἐ'); // (Ἐ) Greek Capital Letter Epsilon with Psili: U+1F18
-// .replace(/(᾽|᾿)Η/g, 'Ἠ'); // (Ἠ) Greek Capital Letter Eta with Psili: U+1F28
-// .replace(/(᾽|᾿)Ι/g, 'Ἰ'); // (Ἰ) Greek Capital Letter Iota with Psili: U+1F38
-// .replace(/(᾽|᾿)Ο/g, 'Ὀ'); // (Ὀ) Greek Capital Letter Omicron with Psili: U+1F48
-//                           //     Greek Capital Letter Upsilon with Psili does not exist
-// .replace(/(᾽|᾿)Ω/g, 'Ὠ'); // (Ὠ) Greek Capital Letter Omega with Psili: U+1F68
