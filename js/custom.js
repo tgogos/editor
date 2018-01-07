@@ -290,7 +290,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		doc_str = cm.getDoc().getValue();
 		// doc_str = doc_str.replace(/\᾿|\’|\‘|\᾽/g, '\'');
-		doc_str = doc_str.replace(/\’|\‘|\᾽|΄/g, '\'');
+		doc_str = doc_str.replace(/\’|\‘|\᾽|΄|ʼ|ʽ/g, '\'');
 		cm.getDoc().setValue(doc_str);
 
 	});
@@ -369,14 +369,14 @@ $(document).ready(function(){
 						 .replace(/῏Ω/g, 'Ὦ')  // (Ὦ) Greek Capital Letter Omega with Psili and Perispomeni: U+1F6E
 
 	 	// Case:
-		//
-						 .replace(/Α/g, '')  //
-						 .replace(/Ε/g, '')  //
-						 .replace(/Η/g, '')  //
-						 .replace(/Ι/g, '')  //
-						 .replace(/Ο/g, '')  //
-						 .replace(/Υ/g, '')  //
-						 .replace(/Ω/g, '')  //
+		// (῏) Greek Psili and Perispomeni: U+1FCF
+						 .replace(/῏Α/g, '')  //
+						 .replace(/῏Ε/g, '')  //
+						 .replace(/῏Η/g, '')  //
+						 .replace(/῏Ι/g, '')  //
+						 .replace(/῏Ο/g, '')  //
+						 .replace(/῏Υ/g, '')  //
+						 .replace(/῏Ω/g, '')  //
 
 		// Case:
 		//
