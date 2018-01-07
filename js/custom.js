@@ -700,7 +700,7 @@ function mark_unwanted_text() {
 			// ʼ : U+02BC Modifier Letter Apostrophe
 			// ʽ : U+02BD Modifier Letter Reversed Comma
 
-			if (lines[i][j].match(/\t|\"|\/|µ|·|˙|΄|᾽|ι|᾿|῀|῁|῍|῎|῏|῝|῞|῟|῭|΅|`|´|῾|\‘|\’|“|”|ʻ|ʽ/g) != null) {
+			if (lines[i][j].match(/\t|\"|\/|µ|·|˙|΄|᾽|ι|᾿|῀|῁|῍|῎|῏|῝|῞|῟|῭|΅|`|´|῾|\‘|\’|“|”|ʼ|ʽ/g) != null) {
 				to.line = i;
 				to.ch   = j+1;
 				start_new_mark = false;
