@@ -696,7 +696,11 @@ function mark_unwanted_text() {
 			// “ : U+201C Left Double Quotation Mark
 			// ” : U+201D Right Double Quotation Mark
 
-			if (lines[i][j].match(/\t|\"|\/|µ|·|˙|΄|᾽|ι|᾿|῀|῁|῍|῎|῏|῝|῞|῟|῭|΅|`|´|῾|\‘|\’|“|”/g) != null) {
+			// IPA EXTENSIONS
+			// ʼ : U+02BC Modifier Letter Apostrophe
+			// ʽ : U+02BD Modifier Letter Reversed Comma
+
+			if (lines[i][j].match(/\t|\"|\/|µ|·|˙|΄|᾽|ι|᾿|῀|῁|῍|῎|῏|῝|῞|῟|῭|΅|`|´|῾|\‘|\’|“|”|ʻ|ʽ/g) != null) {
 				to.line = i;
 				to.ch   = j+1;
 				start_new_mark = false;
