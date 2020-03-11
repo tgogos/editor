@@ -15,12 +15,15 @@ var mark_unwanted = true;
 var punctuation_markers = [];
 var mark_punctuation = true;
 
+var word_wrap = true;
+
 
 $(document).ready(function(){
 
 	cm = CodeMirror(document.body,{
 		theme:"monokai",
 		lineNumbers: true,
+		lineWrapping: word_wrap
 	});
 
 	cm.setSize("100%", "100%");
@@ -532,6 +535,26 @@ $(document).ready(function(){
 			clear_punctuation_markers();
 		}
 
+	});
+
+
+
+
+	// toggle word wrap
+
+	$(".btn-toggle-wrap").on('click',function(event){
+		event.preventDefault();
+		event.stopPropagation();
+		$(".btn-toggle-wrap input").trigger('click');
+
+	});
+	$(".btn-toggle-wrap input").on('click',function(event){
+		event.stopPropagation();
+	});
+	$(".btn-toggle-wrap input").change( function(event){
+		event.stopPropagation();
+		word_wrap = this.checked;
+		cm.setOption("lineWrapping", word_wrap);
 	});
 });
 
