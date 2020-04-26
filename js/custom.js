@@ -336,6 +336,20 @@ $(document).ready(function(){
 
 
 
+	$(".btn-fix-latin-greek").on('click',function(event){
+		// replaces:
+		// ABEHIKMNOPTXYZ opvxz (Latin) with
+		// ΑΒΕΗΙΚΜΝΟΡΤΧΥΖ ορνχζ (Greek)
+		event.preventDefault();
+		doc_str = cm.getDoc().getValue();
+		doc_str = doc_str.replace(/A/g, 'Α').replace(/B/g, 'Β').replace(/E/g, 'Ε').replace(/H/g, 'Η').replace(/I/g, 'Ι').replace(/K/g, 'Κ').replace(/M/g, 'Μ')
+		                 .replace(/N/g, 'Ν').replace(/O/g, 'Ο').replace(/P/g, 'Ρ').replace(/T/g, 'Τ').replace(/X/g, 'Χ').replace(/Y/g, 'Υ').replace(/Z/g, 'Ζ')
+		                 .replace(/o/g, 'ο').replace(/p/g, 'ρ').replace(/v/g, 'ν').replace(/x/g, 'χ').replace(/z/g, 'ζ');
+		cm.getDoc().setValue(doc_str);
+	});
+
+
+
 	$(".btn-fix-diacritics").on('click',function(event){
 		event.preventDefault();
 		doc_str = cm.getDoc().getValue();
