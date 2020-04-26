@@ -367,9 +367,7 @@ $(document).ready(function(){
 		// ===================================================
 
 		// Case:
-		// (᾽) Greek Koronis, U+1FBD OR    
-		// (᾿) Greek Psili: U+1FBF
-		
+		// (᾽) Greek Koronis, U+1FBD OR (᾿) Greek Psili: U+1FBF
 		doc_str = doc_str.replace(/(᾽|᾿)Α/g, 'Ἀ')  // (Ἀ) Greek Capital Letter Alpha with Psili: U+1F08
 						 .replace(/(᾽|᾿)Ε/g, 'Ἐ')  // (Ἐ) Greek Capital Letter Epsilon with Psili: U+1F18
 						 .replace(/(᾽|᾿)Η/g, 'Ἠ')  // (Ἠ) Greek Capital Letter Eta with Psili: U+1F28
@@ -407,6 +405,16 @@ $(document).ready(function(){
 						                       //     Greek Capital Letter Omicron with Psili and Perispomeni does not exist
 						                       //     Greek Capital Letter Upsilon with Psili and Perispomeni does not exist
 						 .replace(/῏Ω/g, 'Ὦ')  // (Ὦ) Greek Capital Letter Omega with Psili and Perispomeni: U+1F6E
+
+		// Case:
+		// (῾) Greek Dasia: U+1FFE
+						 .replace(/῾Α/g, 'Ἁ')  // (Ἁ) Greek Capital Letter Alpha with Dasia: U+1F09
+						 .replace(/῾Ε/g, 'Ἑ')  // (Ἑ) Greek Capital Letter Epsilon with Dasia: U+1F19
+						 .replace(/῾Η/g, 'Ἡ')  // (Ἡ) Greek Capital Letter Eta with Dasia: U+1F29
+						 .replace(/῾Ι/g, 'Ἱ')  // (Ἱ) Greek Capital Letter Iota with Dasia: U+1F39
+						 .replace(/῾Ο/g, 'Ὁ')  // (Ὁ) Greek Capital Letter Omicron with Dasia: U+1F49
+						 .replace(/῾Υ/g, 'Ὑ')  // (Ὑ) Greek Capital Letter Upsilon with Dasia: U+1F59
+						 .replace(/῾Ω/g, 'Ὡ')  // (Ὡ) Greek Capital Letter Omega with Dasia: U+1F69
 
 	 	// Case:
 		// (῝) Greek Dasia and Varia: U+1FDD
