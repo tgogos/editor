@@ -322,6 +322,20 @@ $(document).ready(function(){
 
 
 
+	$(".btn-fix-ano-teleia").on('click',function(event){
+		// replaces:
+		//   - Middle Dot U+00B7
+		//   - Dot Above  U+02D9
+		// with Greek Ano Teleia U+0387
+		event.preventDefault();
+		doc_str = cm.getDoc().getValue();
+		doc_str = doc_str.replace(/·|˙/g, '·');
+		cm.getDoc().setValue(doc_str);
+
+	});
+
+
+
 	$(".btn-fix-diacritics").on('click',function(event){
 		event.preventDefault();
 		doc_str = cm.getDoc().getValue();
