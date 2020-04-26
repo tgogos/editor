@@ -428,8 +428,15 @@ $(document).ready(function(){
 						 .replace(/῞Υ/g, 'Ὕ')  // (Ὕ) Greek Capital Letter Upsilon with Dasia and Oxia: U+1F5D
 						 .replace(/῞Ω/g, 'Ὥ')  // (Ὥ) Greek Capital Letter Omega with Dasia and Oxia: U+1F6D
 
-
-
+		// Case:
+		// (῟) Greek Dasia and Perispomeni: U+1FDF
+						 .replace(/῟Α/g, 'Ἇ')  // (Ἇ) Greek Capital Letter Alpha with Dasia and Perispomeni: U+1F0F
+											   //     Greek Capital Letter Epsilon with Dasia and Perispomeni does not exist
+						 .replace(/῟Η/g, 'Ἧ')  // (Ἧ) Greek Capital Letter Eta with Dasia and Perispomeni: U+1F2F
+						 .replace(/῟Ι/g, 'Ἷ')  // (Ἷ) Greek Capital Letter Iota with Dasia and Perispomeni: U+1F3F
+											   //     Greek Capital Letter Omicron with Dasia and Perispomeni does not exist
+						 .replace(/῟Υ/g, 'Ὗ')  // (Ὗ) Greek Capital Letter Upsilon with Dasia and Perispomeni: U+1F5F
+						 .replace(/῟Ω/g, 'Ὧ')  // (Ὧ) Greek Capital Letter Omega with Dasia and Perispomeni: U+1F6F
 
 		// // Case:
 		// // (X) Greek ... and ...: U+...
