@@ -405,38 +405,29 @@ $(document).ready(function(){
 						 .replace(/῏Η/g, 'Ἦ')  // (Ἦ) Greek Capital Letter Eta with Psili and Perispomeni: U+1F2E
 						 .replace(/῏Ι/g, 'Ἶ')  // (Ἶ) Greek Capital Letter Iota with Psili and Perispomeni: U+1F3E
 						                       //     Greek Capital Letter Omicron with Psili and Perispomeni does not exist
-						                       //     Greek Capital Letter Ypsilon with Psili and Perispomeni does not exist
+						                       //     Greek Capital Letter Upsilon with Psili and Perispomeni does not exist
 						 .replace(/῏Ω/g, 'Ὦ')  // (Ὦ) Greek Capital Letter Omega with Psili and Perispomeni: U+1F6E
 
 	 	// Case:
-		// (῏) Greek Psili and Perispomeni: U+1FCF
-						 .replace(/῏Α/g, '')  //
-						 .replace(/῏Ε/g, '')  //
-						 .replace(/῏Η/g, '')  //
-						 .replace(/῏Ι/g, '')  //
-						 .replace(/῏Ο/g, '')  //
-						 .replace(/῏Υ/g, '')  //
-						 .replace(/῏Ω/g, '')  //
+		// (῝) Greek Dasia and Varia: U+1FDD
+						 .replace(/῝Α/g, 'Ἃ')  // (Ἃ) Greek Capital Letter Alpha with Dasia and Varia: U+1F0B
+						 .replace(/῝Ε/g, 'Ἓ')  // (Ἓ) Greek Capital Letter Epsilon with Dasia and Varia: U+1F1B
+						 .replace(/῝Η/g, 'Ἣ')  // (Ἣ) Greek Capital Letter Eta with Dasia and Varia: U+1F2B
+						 .replace(/῝Ι/g, 'Ἳ')  // (Ἳ) Greek Capital Letter Iota with Dasia and Varia: U+1F3B
+						 .replace(/῝Ο/g, 'Ὃ')  // (Ὃ) Greek Capital Letter Omicron with Dasia and Varia: U+1F4B
+						 .replace(/῝Υ/g, 'Ὓ')  // (Ὓ) Greek Capital Letter Upsilon with Dasia and Varia: U+1F5B
+						 .replace(/῝Ω/g, 'Ὣ')  // (Ὣ) Greek Capital Letter Omega with Dasia and Varia: U+1F6B
 
-		// Case:
-		//
-						 .replace(/Α/g, '')  //
-						 .replace(/Ε/g, '')  //
-						 .replace(/Η/g, '')  //
-						 .replace(/Ι/g, '')  //
-						 .replace(/Ο/g, '')  //
-						 .replace(/Υ/g, '')  //
-						 .replace(/Ω/g, '')  //
 
-	 	// Case:
-		//
-						 .replace(/Α/g, '')  //
-						 .replace(/Ε/g, '')  //
-						 .replace(/Η/g, '')  //
-						 .replace(/Ι/g, '')  //
-						 .replace(/Ο/g, '')  //
-						 .replace(/Υ/g, '')  //
-						 .replace(/Ω/g, '')  //
+		// // Case:
+		// // (X) Greek ... and ...: U+...
+		// 				 .replace(/XΑ/g, '')  //
+		// 				 .replace(/XΕ/g, '')  //
+		// 				 .replace(/XΗ/g, '')  //
+		// 				 .replace(/XΙ/g, '')  //
+		// 				 .replace(/XΟ/g, '')  //
+		// 				 .replace(/XΥ/g, '')  //
+		// 				 .replace(/XΩ/g, '')  //
 
 		cm.getDoc().setValue(doc_str);
 
