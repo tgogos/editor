@@ -56,21 +56,23 @@ $(document).ready(function(){
 	$(".btn-rp-daseia-psili").on('click',function(event){
 		event.preventDefault();
 		doc_str = cm.getDoc().getValue();
-		doc_str = doc_str.replace(/Ἀ|Ἁ|ᾈ|ᾉ|ᾼ/g, "Α");
-		doc_str = doc_str.replace(/Ἐ|Ἑ/g,       "Ε");
-		doc_str = doc_str.replace(/Ἠ|Ἡ|ᾘ|ᾙ/g,   "Η");
-		doc_str = doc_str.replace(/Ἰ|Ἱ/g,       "Ι");
-		doc_str = doc_str.replace(/Ὀ|Ὁ/g,       "Ο");
-		doc_str = doc_str.replace(/Ὑ/g,         "Υ"); // ypsilon can't take psili
-		doc_str = doc_str.replace(/Ὠ|Ὡ|ᾨ|ᾩ/g,   "Ω");
+		doc_str = doc_str
+		.replace(/Ἀ|Ἁ|ᾈ|ᾉ|ᾼ/g, "Α")
+		.replace(/Ἐ|Ἑ/g,       "Ε")
+		.replace(/Ἠ|Ἡ|ᾘ|ᾙ/g,   "Η")
+		.replace(/Ἰ|Ἱ/g,       "Ι")
+		.replace(/Ὀ|Ὁ/g,       "Ο")
+		.replace(/Ὑ/g,         "Υ") // ypsilon can't take psili
+		.replace(/Ὠ|Ὡ|ᾨ|ᾩ/g,   "Ω");
 
-		doc_str = doc_str.replace(/ἀ|ἁ|ᾀ|ᾁ|ᾳ/g, "α");
-		doc_str = doc_str.replace(/ἐ|ἑ/g,       "ε");
-		doc_str = doc_str.replace(/ἠ|ἡ|ᾐ|ᾑ|ῃ/g, "η");
-		doc_str = doc_str.replace(/ἰ|ἱ/g,       "ι");
-		doc_str = doc_str.replace(/ὀ|ὁ/g,       "ο");
-		doc_str = doc_str.replace(/ὐ|ὑ/g,       "υ");
-		doc_str = doc_str.replace(/ὠ|ὡ|ᾠ|ᾡ/g,   "ω");
+		doc_str = doc_str
+		.replace(/ἀ|ἁ|ᾀ|ᾁ|ᾳ/g, "α")
+		.replace(/ἐ|ἑ/g,       "ε")
+		.replace(/ἠ|ἡ|ᾐ|ᾑ|ῃ/g, "η")
+		.replace(/ἰ|ἱ/g,       "ι")
+		.replace(/ὀ|ὁ/g,       "ο")
+		.replace(/ὐ|ὑ/g,       "υ")
+		.replace(/ὠ|ὡ|ᾠ|ᾡ/g,   "ω");
 		cm.getDoc().setValue(doc_str);
 
 	});
@@ -78,23 +80,25 @@ $(document).ready(function(){
 	$(".btn-rp-daseia-psili-tonos").on('click',function(event){
 		event.preventDefault();
 		doc_str = cm.getDoc().getValue();
-		doc_str = doc_str.replace(/Ἂ|Ἃ|Ἄ|Ἅ|Ἆ|Ἇ|ᾊ|ᾋ|ᾌ|ᾍ|ᾎ|ᾏ|Ὰ|Ά/g, "Ά");
-		doc_str = doc_str.replace(/Ἒ|Ἓ|Ἔ|Ἕ|Ὲ|Έ/g,                 "Έ");
-		doc_str = doc_str.replace(/Ἢ|Ἣ|Ἤ|Ἥ|Ἦ|Ἧ|ᾚ|ᾛ|ᾜ|ᾝ|ᾞ|ᾟ|Ὴ|Ή/g, "Ή");
-		doc_str = doc_str.replace(/Ἲ|Ἳ|Ἴ|Ἵ|Ἶ|Ἷ|Ὶ|Ί/g,             "Ί");
-		doc_str = doc_str.replace(/Ὂ|Ὃ|Ὄ|Ὅ|Ὸ|Ό/g,                 "Ό");
-		doc_str = doc_str.replace(/Ὓ|Ὕ|Ὗ|Ὺ|Ύ/g,                   "Ύ");
-		doc_str = doc_str.replace(/Ὢ|Ὣ|Ὤ|Ὥ|Ὦ|Ὧ|ᾪ|ᾫ|ᾬ|ᾭ|ᾮ|ᾯ|Ὼ|Ώ/g, "Ώ");
+		doc_str = doc_str
+		.replace(/Ἂ|Ἃ|Ἄ|Ἅ|Ἆ|Ἇ|ᾊ|ᾋ|ᾌ|ᾍ|ᾎ|ᾏ|Ὰ|Ά/g, "Ά")
+		.replace(/Ἒ|Ἓ|Ἔ|Ἕ|Ὲ|Έ/g,                 "Έ")
+		.replace(/Ἢ|Ἣ|Ἤ|Ἥ|Ἦ|Ἧ|ᾚ|ᾛ|ᾜ|ᾝ|ᾞ|ᾟ|Ὴ|Ή/g, "Ή")
+		.replace(/Ἲ|Ἳ|Ἴ|Ἵ|Ἶ|Ἷ|Ὶ|Ί/g,             "Ί")
+		.replace(/Ὂ|Ὃ|Ὄ|Ὅ|Ὸ|Ό/g,                 "Ό")
+		.replace(/Ὓ|Ὕ|Ὗ|Ὺ|Ύ/g,                   "Ύ")
+		.replace(/Ὢ|Ὣ|Ὤ|Ὥ|Ὦ|Ὧ|ᾪ|ᾫ|ᾬ|ᾭ|ᾮ|ᾯ|Ὼ|Ώ/g, "Ώ");
 
-		doc_str = doc_str.replace(/ἂ|ἃ|ἄ|ἅ|ἆ|ἇ|ὰ|ά|ᾂ|ᾃ|ᾄ|ᾅ|ᾆ|ᾇ|ᾲ|ᾴ|ᾶ|ᾷ/g, "ά");
-		doc_str = doc_str.replace(/ἒ|ἓ|ἔ|ἕ|ὲ|έ/g,                         "έ");
-		doc_str = doc_str.replace(/ἢ|ἣ|ἤ|ἥ|ἦ|ἧ|ὴ|ή|ᾒ|ᾓ|ᾔ|ᾕ|ᾖ|ᾗ|ῂ|ῄ|ῆ|ῇ/g, "ή");
-		doc_str = doc_str.replace(/ἲ|ἳ|ἴ|ἵ|ἶ|ἷ|ὶ|ί|ῖ/g,                   "ί");
-		doc_str = doc_str.replace(/ῒ|ΐ|ῗ/g,                               "ΐ");
-		doc_str = doc_str.replace(/ὂ|ὃ|ὄ|ὅ|ὸ|ό/g,                         "ό");
-		doc_str = doc_str.replace(/ὒ|ὓ|ὔ|ὕ|ὖ|ὗ|ὺ|ύ|ῦ/g,                   "ύ");
-		doc_str = doc_str.replace(/ῢ|ΰ|ῧ/g,                               "ΰ");
-		doc_str = doc_str.replace(/ὢ|ὣ|ὤ|ὥ|ὦ|ὧ|ὼ|ώ|ᾢ|ᾣ|ᾤ|ᾥ|ᾦ|ᾧ|ῲ|ῴ|ῶ|ῷ/g, "ώ");
+		doc_str = doc_str
+		.replace(/ἂ|ἃ|ἄ|ἅ|ἆ|ἇ|ὰ|ά|ᾂ|ᾃ|ᾄ|ᾅ|ᾆ|ᾇ|ᾲ|ᾴ|ᾶ|ᾷ/g, "ά")
+		.replace(/ἒ|ἓ|ἔ|ἕ|ὲ|έ/g,                         "έ")
+		.replace(/ἢ|ἣ|ἤ|ἥ|ἦ|ἧ|ὴ|ή|ᾒ|ᾓ|ᾔ|ᾕ|ᾖ|ᾗ|ῂ|ῄ|ῆ|ῇ/g, "ή")
+		.replace(/ἲ|ἳ|ἴ|ἵ|ἶ|ἷ|ὶ|ί|ῖ/g,                   "ί")
+		.replace(/ῒ|ΐ|ῗ/g,                               "ΐ")
+		.replace(/ὂ|ὃ|ὄ|ὅ|ὸ|ό/g,                         "ό")
+		.replace(/ὒ|ὓ|ὔ|ὕ|ὖ|ὗ|ὺ|ύ|ῦ/g,                   "ύ")
+		.replace(/ῢ|ΰ|ῧ/g,                               "ΰ")
+		.replace(/ὢ|ὣ|ὤ|ὥ|ὦ|ὧ|ὼ|ώ|ᾢ|ᾣ|ᾤ|ᾥ|ᾦ|ᾧ|ῲ|ῴ|ῶ|ῷ/g, "ώ");
 		cm.getDoc().setValue(doc_str);
 
 	});
@@ -106,7 +110,8 @@ $(document).ready(function(){
 
 
 		// 2-grams
-		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)άς(\n| |\,|\.|\!|\;)/g, '$1ας$2')
+		doc_str = doc_str
+		.replace(/(\n| |\,|\.|\!|\;)άς(\n| |\,|\.|\!|\;)/g, '$1ας$2')
 		.replace(/(\n| |\,|\.|\!|\;)Άς(\n| |\,|\.|\!|\;)/g, '$1Ας$2')
 		.replace(/(\n| |\,|\.|\!|\;)άν(\n| |\,|\.|\!|\;)/g, '$1αν$2')
 		.replace(/(\n| |\,|\.|\!|\;)Άν(\n| |\,|\.|\!|\;)/g, '$1Αν$2')
@@ -150,7 +155,8 @@ $(document).ready(function(){
 
 
 		// 3-grams
-		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)βρώ(\n| |\,|\.|\!|\;)/g, '$1βρω$2')
+		doc_str = doc_str
+		.replace(/(\n| |\,|\.|\!|\;)βρώ(\n| |\,|\.|\!|\;)/g, '$1βρω$2')
 		.replace(/(\n| |\,|\.|\!|\;)Βρώ(\n| |\,|\.|\!|\;)/g, '$1Βρω$2')
 		.replace(/(\n| |\,|\.|\!|\;)γιά(\n| |\,|\.|\!|\;)/g, '$1για$2')
 		.replace(/(\n| |\,|\.|\!|\;)Γιά(\n| |\,|\.|\!|\;)/g, '$1Για$2')
@@ -231,7 +237,8 @@ $(document).ready(function(){
 
 
 		// 4-grams
-		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)βρές(\n| |\,|\.|\!|\;)/g, '$1βρες$2')
+		doc_str = doc_str
+		.replace(/(\n| |\,|\.|\!|\;)βρές(\n| |\,|\.|\!|\;)/g, '$1βρες$2')
 		.replace(/(\n| |\,|\.|\!|\;)Βρές(\n| |\,|\.|\!|\;)/g, '$1Βρες$2')
 		.replace(/(\n| |\,|\.|\!|\;)βγεί(\n| |\,|\.|\!|\;)/g, '$1βγει$2')
 		.replace(/(\n| |\,|\.|\!|\;)Βγεί(\n| |\,|\.|\!|\;)/g, '$1Βγει$2')
@@ -269,7 +276,8 @@ $(document).ready(function(){
 
 
 		// 5-grams
-		doc_str = doc_str.replace(/(\n| |\,|\.|\!|\;)βγείς(\n| |\,|\.|\!|\;)/g, '$1βγεις$2')
+		doc_str = doc_str
+		.replace(/(\n| |\,|\.|\!|\;)βγείς(\n| |\,|\.|\!|\;)/g, '$1βγεις$2')
 		.replace(/(\n| |\,|\.|\!|\;)Βγείς(\n| |\,|\.|\!|\;)/g, '$1Βγεις$2')
 		.replace(/(\n| |\,|\.|\!|\;)βρείς(\n| |\,|\.|\!|\;)/g, '$1βρεις$2')
 		.replace(/(\n| |\,|\.|\!|\;)Βρείς(\n| |\,|\.|\!|\;)/g, '$1Βρεις$2')
