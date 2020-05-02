@@ -16,6 +16,7 @@ var punctuation_markers = [];
 var mark_punctuation = true;
 
 var word_wrap = true;
+var font_size = 14;
 
 
 $(document).ready(function(){
@@ -528,6 +529,29 @@ $(document).ready(function(){
 		} else {
 			clear_greek_extended_markers();
 		}
+	});
+
+
+
+
+	//
+	// listeners for inc/decrease the font size
+	//
+	$(".btn-font-inc").on('click',function(event){
+		event.preventDefault();
+		event.stopPropagation();
+		$(".CodeMirror").css("font-size",++font_size);
+	});
+	$(".btn-font-dec").on('click',function(event){
+		event.preventDefault();
+		event.stopPropagation();
+		$(".CodeMirror").css("font-size",--font_size);
+	});
+	$(".btn-font-rst").on('click',function(event){
+		event.preventDefault();
+		event.stopPropagation();
+		font_size = 14;
+		$(".CodeMirror").css("font-size",font_size);
 	});
 
 
