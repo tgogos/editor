@@ -1,12 +1,12 @@
 html, body {height: 100%; position: relative;}
 
 .CodeMirror {position: absolute !important; padding-top: 50px; top: 0;}
-.gr-ext {background-color: #fff34f;}
-.gr-coptic {background-color: #a9e287;}
-.num {background-color: #ffc107;}
-.latin-red {background-color: #f3435b;}
-.unwanted {background-color: #f3435b;}
-.punctuation {background-color: #dbf5cb;}
+.gr-ext {background-color: #fff34f; color: #5a571c;}
+.gr-coptic {background-color: #a9e287; color: #2f670e;}
+.num {background-color: #ffc107; color: #7d5f05;}
+.latin-red {background-color: #f3435b; color: #77111f;}
+.unwanted {background-color: #f3435b; color: #77111f;}
+.punctuation {background-color: #dbf5cb; color:#2f670e;}
 
 .btn-mark-greek-coptic:before,
 .btn-mark-greek-ext:before,
