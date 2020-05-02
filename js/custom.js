@@ -581,7 +581,7 @@ $(document).ready(function(){
 		event.stopPropagation();
 	});
 	$(".btn-mark-greek-coptic input").change( function(event){
-		// event.preventDefault();
+		event.preventDefault();
 		event.stopPropagation();
 		mark_greek_coptic = this.checked;
 		if (mark_greek_coptic) {
@@ -604,7 +604,7 @@ $(document).ready(function(){
 		event.stopPropagation();
 	});
 	$(".btn-mark-num input").change( function(event){
-		// event.preventDefault();
+		event.preventDefault();
 		event.stopPropagation();
 		mark_numbers = this.checked;
 		if (mark_numbers) {
@@ -852,7 +852,7 @@ function mark_numbers_text() {
 				} else {
 					from.ch = matched_char_positions[0];
 					to.ch   = matched_char_positions[0] + matched_char_positions.length;
-					greek_coptic_markers.push(cm.markText(from,to,{className: "num"}));
+					number_markers.push(cm.markText(from,to,{className: "num"}));
 					matched_char_positions = [];
 				}
 			}
@@ -860,7 +860,7 @@ function mark_numbers_text() {
 			if (j==lines[i].length-1) {
 				from.ch = matched_char_positions[0];
 				to.ch   = matched_char_positions[0] + matched_char_positions.length;
-				greek_coptic_markers.push(cm.markText(from,to,{className: "num"}));
+				number_markers.push(cm.markText(from,to,{className: "num"}));
 				matched_char_positions = [];
 			}
 		}
