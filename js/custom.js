@@ -548,17 +548,20 @@ $(document).ready(function(){
 		event.preventDefault();
 		event.stopPropagation();
 		$(".CodeMirror").css("font-size",++font_size);
+		cm.refresh();
 	});
 	$(".btn-font-dec").on('click',function(event){
 		event.preventDefault();
 		event.stopPropagation();
 		$(".CodeMirror").css("font-size",--font_size);
+		cm.refresh();
 	});
 	$(".btn-font-rst").on('click',function(event){
 		event.preventDefault();
 		event.stopPropagation();
 		font_size = 14;
 		$(".CodeMirror").css("font-size",font_size);
+		cm.refresh();
 	});
 
 
