@@ -463,6 +463,49 @@ $(document).ready(function(){
 
 
 
+	// 
+	// Normalization Form D (NFD): Canonical Decomposition
+	// 
+	$(".btn-norm-NFD").on('click',function(event){
+		event.preventDefault();
+		cm.getDoc().setValue(cm.getDoc().getValue().normalize('NFD'));
+	});
+
+	// 
+	// Normalization Form C (NFC): Canonical Decomposition, followed by Canonical Composition
+	// 
+	$(".btn-norm-NFC").on('click',function(event){
+		event.preventDefault();
+		cm.getDoc().setValue(cm.getDoc().getValue().normalize('NFC'));
+	});
+
+	// 
+	// Normalization Form KD (NFKD): Compatibility Decomposition
+	// 
+	$(".btn-norm-NFKD").on('click',function(event){
+		event.preventDefault();
+		cm.getDoc().setValue(cm.getDoc().getValue().normalize('NFKD'));
+	});
+
+	//
+	// Normalization Form KC (NFKC): Compatibility Decomposition, followed by Canonical Composition
+	//
+	$(".btn-norm-NFKC").on('click',function(event){
+		event.preventDefault();
+		cm.getDoc().setValue(cm.getDoc().getValue().normalize('NFKC'));
+	});
+
+	//
+	// Normalize (remove) greek accents
+	//
+	$(".btn-norm-GR").on('click',function(event){
+		event.preventDefault();
+		cm.getDoc().setValue(cm.getDoc().getValue().normalize('NFD').replace(/[\u0300-\u036f]/g, ""));
+	}); 
+
+
+
+
 	// mark greek extended
 
 	$(".btn-mark-greek-ext").on('click',function(event){
