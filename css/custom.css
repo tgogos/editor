@@ -3,12 +3,14 @@ html, body {height: 100%; position: relative;}
 .CodeMirror {position: absolute !important; padding-top: 50px; top: 0;}
 .gr-ext {background-color: #fff34f;}
 .gr-coptic {background-color: #a9e287;}
+.num {background-color: #ffc107;}
 .latin-red {background-color: #f3435b;}
 .unwanted {background-color: #f3435b;}
 .punctuation {background-color: #dbf5cb;}
 
 .btn-mark-greek-coptic:before,
 .btn-mark-greek-ext:before,
+.btn-mark-num:before,
 .btn-mark-latin-red:before,
 .btn-mark-unwanted:before,
 .btn-mark-punctuation:before {content: ' '; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background-color: #a9e287;}
@@ -16,6 +18,8 @@ html, body {height: 100%; position: relative;}
 .btn-mark-greek-coptic {position: relative;}
 .btn-mark-greek-ext {position: relative;}
 .btn-mark-greek-ext:before {background-color: #fff34f;}
+.btn-mark-num {position: relative;}
+.btn-mark-num:before {background-color: #ffc107;}
 .btn-mark-latin-red {position: relative;}
 .btn-mark-latin-red:before {background-color: #f3435b;}
 .btn-mark-unwanted {position: relative;}

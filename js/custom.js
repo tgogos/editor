@@ -6,6 +6,9 @@ var mark_greek_extended = true;
 var greek_coptic_markers = [];
 var mark_greek_coptic = true;
 
+var number_markers = [];
+var mark_numbers = true;
+
 var latin_red_markers = [];
 var mark_latin_red = true;
 
@@ -38,6 +41,10 @@ $(document).ready(function(){
 		if (mark_greek_coptic) {
 			clear_greek_coptic_markers();
 			mark_greek_coptic_text();
+		}
+		if (mark_numbers) {
+			clear_number_markers();
+			mark_numbers_text();
 		}
 		if (mark_latin_red) {
 			clear_latin_red_markers();
@@ -582,8 +589,28 @@ $(document).ready(function(){
 
 	});
 
+	// mark numbers
 
+	$(".btn-mark-num").on('click',function(event){
+		event.preventDefault();
+		event.stopPropagation();
+		$(".btn-mark-num input").trigger('click');
 
+	});
+	$(".btn-mark-num input").on('click',function(event){
+		event.stopPropagation();
+	});
+	$(".btn-mark-num input").change( function(event){
+		// event.preventDefault();
+		event.stopPropagation();
+		mark_numbers = this.checked;
+		if (mark_numbers) {
+			mark_numbers_text();
+		} else {
+			clear_number_markers();
+		}
+
+	});
 
 	// mark basic-latin 
 
@@ -607,10 +634,6 @@ $(document).ready(function(){
 
 	});
 
-
-
-
-
 	// mark unwanted 
 
 	$(".btn-mark-unwanted").on('click',function(event){
@@ -632,9 +655,6 @@ $(document).ready(function(){
 		}
 
 	});
-
-
-
 
 	// mark punctuation
 
@@ -690,6 +710,10 @@ function clear_greek_extended_markers() {
 
 function clear_greek_coptic_markers() {
 	greek_coptic_markers.forEach(marker => marker.clear());
+}
+
+function clear_number_markers() {
+	number_markers.forEach(marker => marker.clear());
 }
 
 function clear_latin_red_markers() {
@@ -789,6 +813,51 @@ function mark_greek_coptic_text() {
 				from.ch = matched_char_positions[0];
 				to.ch   = matched_char_positions[0] + matched_char_positions.length;
 				greek_coptic_markers.push(cm.markText(from,to,{className: "gr-coptic"}));
+				matched_char_positions = [];
+			}
+		}
+	}
+}
+
+
+
+
+function mark_numbers_text() {
+	doc_str = cm.getDoc().getValue();
+	var lines = doc_str.split('\n');
+	var from = {line:0,ch:0};
+	var to   = {line:0,ch:0};
+	var matched_char_positions = [];
+
+	for (var i=0; i<lines.length; i++) {
+		from.line = i;
+		from.ch   = 0;
+		to.line   = i;
+		to.ch     = 0;
+		matched_char_positions = [];
+
+
+		for (var j=0; j<lines[i].length; j++) {
+
+			if (lines[i][j].match(/[\u0028-\u002b]|[\u002f-\u0039]/g) != null) {
+
+				matched_char_positions.push(j);
+
+			} else {
+				if (matched_char_positions.length == 0) {
+					continue;
+				} else {
+					from.ch = matched_char_positions[0];
+					to.ch   = matched_char_positions[0] + matched_char_positions.length;
+					greek_coptic_markers.push(cm.markText(from,to,{className: "num"}));
+					matched_char_positions = [];
+				}
+			}
+
+			if (j==lines[i].length-1) {
+				from.ch = matched_char_positions[0];
+				to.ch   = matched_char_positions[0] + matched_char_positions.length;
+				greek_coptic_markers.push(cm.markText(from,to,{className: "num"}));
 				matched_char_positions = [];
 			}
 		}
