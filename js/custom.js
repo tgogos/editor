@@ -471,6 +471,14 @@ $(document).ready(function(){
 
 
 
+	$(".btn-fix-spaces").on('click',function(event){
+		event.preventDefault();
+		cm.getDoc().setValue(cm.getDoc().getValue().replace(/( )+/g, ' '));
+	});
+
+
+
+
 	// 
 	// Normalization Form D (NFD): Canonical Decomposition
 	// 
