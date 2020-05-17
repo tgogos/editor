@@ -318,12 +318,9 @@ $(document).ready(function(){
 
 
 
-	$(".btn-fix-micro-sign").on('click',function(event){
+	$(".btn-fix-math-symbols").on('click',function(event){
 		event.preventDefault();
-		doc_str = cm.getDoc().getValue();
-		doc_str = doc_str.replace(/µ/g, 'μ');
-		cm.getDoc().setValue(doc_str);
-
+		cm.getDoc().setValue(cm.getDoc().getValue().replace(/µ/g, 'μ').replace(/∆/g, 'Δ'));
 	});
 
 
@@ -984,7 +981,7 @@ function mark_unwanted_text() {
 			// ʼ : U+02BC Modifier Letter Apostrophe
 			// ʽ : U+02BD Modifier Letter Reversed Comma
 			
-			if (lines[i][j].match(/\"|\/|µ|·|˙|΄|᾽|ι|᾿|῀|῁|῍|῎|῏|῝|῞|῟|῭|΅|`|´|῾|\‘|\’|“|”|ʼ|ʽ/g) != null) {
+			if (lines[i][j].match(/\"|\/|µ|∆|·|˙|΄|᾽|ι|᾿|῀|῁|῍|῎|῏|῝|῞|῟|῭|΅|`|´|῾|\‘|\’|“|”|ʼ|ʽ/g) != null) {
 
 				matched_char_positions.push(j);
 
