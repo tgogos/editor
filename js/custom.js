@@ -310,7 +310,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		doc_str = cm.getDoc().getValue();
 		// doc_str = doc_str.replace(/\᾿|\’|\‘|\᾽/g, '\'');
-		doc_str = doc_str.replace(/\’|\‘|\᾽|΄|ʼ|ʽ/g, '\'');
+		doc_str = doc_str.replace(/\'|\‘|\᾽|΄|ʼ|ʽ/g, '\’');
 		cm.getDoc().setValue(doc_str);
 
 	});
@@ -328,7 +328,7 @@ $(document).ready(function(){
 	$(".btn-fix-psili").on('click',function(event){
 		event.preventDefault();
 		doc_str = cm.getDoc().getValue();
-		doc_str = doc_str.replace(/᾿/g, '\'');
+		doc_str = doc_str.replace(/᾿/g, '\’');
 		cm.getDoc().setValue(doc_str);
 
 	});
@@ -941,6 +941,7 @@ function mark_unwanted_text() {
 
 			// BASIC LATIN
 			// " : U+0022 Quotation Mark
+			// ' : U+0027 APOSTROPHE {APL quote}
 			// / : U+002F Solidus
 
 			// LATIN-1 SUPPLEMENT
@@ -981,7 +982,7 @@ function mark_unwanted_text() {
 			// ʼ : U+02BC Modifier Letter Apostrophe
 			// ʽ : U+02BD Modifier Letter Reversed Comma
 			
-			if (lines[i][j].match(/\"|\/|µ|∆|·|˙|΄|᾽|ι|᾿|῀|῁|῍|῎|῏|῝|῞|῟|῭|΅|`|´|῾|\‘|\’|“|”|ʼ|ʽ/g) != null) {
+			if (lines[i][j].match(/\"|\'|\/|µ|∆|·|˙|΄|᾽|ι|᾿|῀|῁|῍|῎|῏|῝|῞|῟|῭|΅|`|´|῾|\‘|“|”|ʼ|ʽ/g) != null) {
 
 				matched_char_positions.push(j);
 
@@ -1029,7 +1030,7 @@ function mark_punctuation_text() {
 			// CONTROL CHARACTERS
 			// \t : U+0009 Horizontal Tabulation
 			
-			if (lines[i][j].match(/\t|\.|\,|\'| |…|:|;|;|!|«|»|-/g) != null) {
+			if (lines[i][j].match(/\t|\.|\,|\’| |…|:|;|;|!|«|»|-/g) != null) {
 
 				matched_char_positions.push(j);
 
