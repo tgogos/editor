@@ -71,7 +71,8 @@ $(document).ready(function(){
 		.replace(/Ἰ|Ἱ/g,       "Ι")
 		.replace(/Ὀ|Ὁ/g,       "Ο")
 		.replace(/Ὑ/g,         "Υ") // ypsilon can't take psili
-		.replace(/Ὠ|Ὡ|ᾨ|ᾩ/g,   "Ω");
+		.replace(/Ὠ|Ὡ|ᾨ|ᾩ/g,   "Ω")
+		.replace(/Ῥ/g,         "Ρ");
 
 		doc_str = doc_str
 		.replace(/ἀ|ἁ|ᾀ|ᾁ|ᾳ/g, "α")
@@ -80,7 +81,8 @@ $(document).ready(function(){
 		.replace(/ἰ|ἱ/g,       "ι")
 		.replace(/ὀ|ὁ/g,       "ο")
 		.replace(/ὐ|ὑ/g,       "υ")
-		.replace(/ὠ|ὡ|ᾠ|ᾡ/g,   "ω");
+		.replace(/ὠ|ὡ|ᾠ|ᾡ/g,   "ω")
+		.replace(/ῤ|ῥ/g,       "ρ");
 		cm.getDoc().setValue(doc_str);
 
 	});
