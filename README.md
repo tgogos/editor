@@ -15,3 +15,7 @@ The big number of badly-used characters also led us to the creation of functions
 ## Short demo
 
 ![](demo.gif)
+
+## Under the hood...
+
+Go check what's inside [this js](js/custom.js) file. All the "magic" is there!
