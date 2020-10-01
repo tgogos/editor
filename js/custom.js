@@ -21,6 +21,8 @@ var mark_punctuation = true;
 var word_wrap = true;
 var font_size = 14;
 
+var character_list_punctuation = ['\t', '\.', '\,', '\’', ' ', '…', ':', ';', ';', '!', '«', '»', '-'];
+
 
 $(document).ready(function(){
 
@@ -681,7 +683,8 @@ $(document).ready(function(){
 		event.stopPropagation();
 		mark_punctuation = this.checked;
 		if (mark_punctuation) {
-			mark_punctuation_text();
+			// mark_punctuation_text();
+			mark(character_list_punctuation,"punctuation");
 		} else {
 			clear_punctuation_markers();
 		}
@@ -1051,6 +1054,51 @@ function mark_punctuation_text() {
 				from.ch = matched_char_positions[0];
 				to.ch   = matched_char_positions[0] + matched_char_positions.length;
 				punctuation_markers.push(cm.markText(from,to,{className: "punctuation"}));
+				matched_char_positions = [];
+			}
+		}
+	}
+}
+
+function mark(character_list, css_class_name) {
+	doc_str = cm.getDoc().getValue();
+	var lines = doc_str.split('\n');
+	var from = {line:0,ch:0};
+	var to   = {line:0,ch:0};
+	var matched_char_positions = [];
+
+	var regex = new RegExp(character_list.join('|'));
+	var css_class_obj = {className: css_class_name};
+
+	for (var i=0; i<lines.length; i++) {
+		from.line = i;
+		from.ch   = 0;
+		to.line   = i;
+		to.ch     = 0;
+		matched_char_positions = [];
+
+
+		for (var j=0; j<lines[i].length; j++) {
+			
+			if (lines[i][j].match(regex, 'g') != null) {
+
+				matched_char_positions.push(j);
+
+			} else {
+				if (matched_char_positions.length == 0) {
+					continue;
+				} else {
+					from.ch = matched_char_positions[0];
+					to.ch   = matched_char_positions[0] + matched_char_positions.length;
+					punctuation_markers.push(cm.markText(from,to,css_class_obj));
+					matched_char_positions = [];
+				}
+			}
+
+			if (j==lines[i].length-1) {
+				from.ch = matched_char_positions[0];
+				to.ch   = matched_char_positions[0] + matched_char_positions.length;
+				punctuation_markers.push(cm.markText(from,to,css_class_obj));
 				matched_char_positions = [];
 			}
 		}
