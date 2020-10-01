@@ -1,6 +1,6 @@
-var cm = null; // codemirror
-var doc_str = null;
-
+// -------------------------------------------        Settings        -------------------------------------------
+var cm        = null; // codemirror
+var doc_str   = null;
 var word_wrap = true;
 var font_size = 14;
 
@@ -28,12 +28,14 @@ var char_list_punctuation    = ['\t', '\.', '\,', '\’', ' ', '…', ':', ';', 
 var char_list_greek_extended = "[\\u1F00-\\u1FFF]";
 var char_list_greek_coptic   = "[\\u0370-\\u03FF]";
 var char_list_numbers        = "[\\u0028-\\u002b]|[\\u002f-\\u0039]";
+var char_list_latin          = "[\\u003C-\\u007F]";
 
 // string values of CSS class names for highlighting characters
 var char_class_punctuation = "punctuation";
 var char_class_gr_ext      = "gr-ext";
 var char_class_gr_coptic   = "gr-coptic";
 var char_class_numbers     = "num";
+var char_class_latin       = "latin";
 
 // ------------------------------------------- - - - - - - - - - - - - ------------------------------------------
 
@@ -636,7 +638,8 @@ $(document).ready(function(){
 		event.stopPropagation();
 		mark_numbers = this.checked;
 		if (mark_numbers) {
-			mark_numbers_text();
+			// mark_numbers_text();
+			mark(char_list_numbers, char_class_numbers);
 		} else {
 			clear_number_markers();
 		}
@@ -658,7 +661,8 @@ $(document).ready(function(){
 		event.stopPropagation();
 		mark_latin_red = this.checked;
 		if (mark_latin_red) {
-			mark_latin_text_red();
+			// mark_latin_text_red();
+			mark(char_list_latin, char_class_latin);
 		} else {
 			clear_latin_red_markers();
 		}
@@ -898,7 +902,7 @@ function mark_numbers_text() {
 
 
 
-
+// deprecated, to be removed
 function mark_latin_text_red() {
 	doc_str = cm.getDoc().getValue();
 	var lines = doc_str.split('\n');
