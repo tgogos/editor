@@ -26,10 +26,12 @@ var mark_punctuation    = true;
 // Character lists to be used with the highlighting function: mark()
 var char_list_punctuation    = ['\t', '\.', '\,', '\’', ' ', '…', ':', ';', ';', '!', '«', '»', '-'].join('|');
 var char_list_greek_extended = "[\\u1F00-\\u1FFF]";
+var char_list_greek_coptic   = "[\\u0370-\\u03FF]";
 
 // string values of CSS class names for highlighting characters
 var char_class_punctuation = "punctuation";
 var char_class_gr_ext      = "gr-ext";
+var char_class_gr_coptic   = "gr-coptic";
 
 // ------------------------------------------- - - - - - - - - - - - - ------------------------------------------
 
@@ -608,7 +610,8 @@ $(document).ready(function(){
 		event.stopPropagation();
 		mark_greek_coptic = this.checked;
 		if (mark_greek_coptic) {
-			mark_greek_coptic_text();
+			//mark_greek_coptic_text();
+			mark(char_list_greek_coptic,char_class_gr_coptic);
 		} else {
 			clear_greek_coptic_markers();
 		}
