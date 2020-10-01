@@ -27,11 +27,13 @@ var mark_punctuation    = true;
 var char_list_punctuation    = ['\t', '\.', '\,', '\’', ' ', '…', ':', ';', ';', '!', '«', '»', '-'].join('|');
 var char_list_greek_extended = "[\\u1F00-\\u1FFF]";
 var char_list_greek_coptic   = "[\\u0370-\\u03FF]";
+var char_list_numbers        = "[\\u0028-\\u002b]|[\\u002f-\\u0039]";
 
 // string values of CSS class names for highlighting characters
 var char_class_punctuation = "punctuation";
 var char_class_gr_ext      = "gr-ext";
 var char_class_gr_coptic   = "gr-coptic";
+var char_class_numbers     = "num";
 
 // ------------------------------------------- - - - - - - - - - - - - ------------------------------------------
 
@@ -851,7 +853,7 @@ function mark_greek_coptic_text() {
 
 
 
-
+// deprecated, to be removed
 function mark_numbers_text() {
 	doc_str = cm.getDoc().getValue();
 	var lines = doc_str.split('\n');
