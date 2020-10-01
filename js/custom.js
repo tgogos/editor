@@ -1,27 +1,40 @@
 var cm = null; // codemirror
 var doc_str = null;
-var greek_extended_markers = [];
-var mark_greek_extended = true;
-
-var greek_coptic_markers = [];
-var mark_greek_coptic = true;
-
-var number_markers = [];
-var mark_numbers = true;
-
-var latin_red_markers = [];
-var mark_latin_red = true;
-
-var unwanted_markers = [];
-var mark_unwanted = true;
-
-var punctuation_markers = [];
-var mark_punctuation = true;
 
 var word_wrap = true;
 var font_size = 14;
 
-var character_list_punctuation = ['\t', '\.', '\,', '\’', ' ', '…', ':', ';', ';', '!', '«', '»', '-'];
+
+// ------------------------------------------- Character Highlighting -------------------------------------------
+
+// arrays used for storing character highlighting (marking) set to code mirror
+var greek_extended_markers = [];
+var greek_coptic_markers   = [];
+var number_markers         = [];
+var latin_red_markers      = [];
+var unwanted_markers       = [];
+var punctuation_markers    = [];
+
+// UI settings (checkboxes) start by default true
+var mark_greek_extended = true;
+var mark_greek_coptic   = true;
+var mark_numbers        = true;
+var mark_latin_red      = true;
+var mark_unwanted       = true;
+var mark_punctuation    = true;
+
+// Character lists to be used with the highlighting function: mark()
+var char_list_punctuation    = ['\t', '\.', '\,', '\’', ' ', '…', ':', ';', ';', '!', '«', '»', '-'].join('|');
+var char_list_greek_extended = "[\\u1F00-\\u1FFF]";
+
+// string values of CSS class names for highlighting characters
+var char_class_punctuation = "punctuation";
+var char_class_gr_ext      = "gr-ext";
+
+// ------------------------------------------- - - - - - - - - - - - - ------------------------------------------
+
+
+
 
 
 $(document).ready(function(){
@@ -541,7 +554,8 @@ $(document).ready(function(){
 		event.stopPropagation();
 		mark_greek_extended = this.checked;
 		if (mark_greek_extended) {
-			mark_greek_extended_text();
+			// mark_greek_extended_text();
+			mark(char_list_greek_extended, char_class_gr_ext)
 		} else {
 			clear_greek_extended_markers();
 		}
@@ -684,7 +698,7 @@ $(document).ready(function(){
 		mark_punctuation = this.checked;
 		if (mark_punctuation) {
 			// mark_punctuation_text();
-			mark(character_list_punctuation,"punctuation");
+			mark(char_list_punctuation, char_class_punctuation);
 		} else {
 			clear_punctuation_markers();
 		}
@@ -743,7 +757,7 @@ function clear_punctuation_markers() {
 
 
 
-
+// deprecated, to be deleted
 function mark_greek_extended_text() {
 	doc_str = cm.getDoc().getValue();
 	var lines = doc_str.split('\n');
@@ -789,7 +803,7 @@ function mark_greek_extended_text() {
 
 
 
-
+// deprecated, to be removed
 function mark_greek_coptic_text() {
 	doc_str = cm.getDoc().getValue();
 	var lines = doc_str.split('\n');
@@ -1014,7 +1028,7 @@ function mark_unwanted_text() {
 
 
 
-
+// deprecated, to be deleted
 function mark_punctuation_text() {
 	doc_str = cm.getDoc().getValue();
 	var lines = doc_str.split('\n');
@@ -1060,6 +1074,10 @@ function mark_punctuation_text() {
 	}
 }
 
+// function that scans the whole text and adds color when needed.
+// character_list must be a string,
+// valid regex, in order to be used with javascript function: RegExp()
+// 
 function mark(character_list, css_class_name) {
 	doc_str = cm.getDoc().getValue();
 	var lines = doc_str.split('\n');
@@ -1067,7 +1085,7 @@ function mark(character_list, css_class_name) {
 	var to   = {line:0,ch:0};
 	var matched_char_positions = [];
 
-	var regex = new RegExp(character_list.join('|'));
+	var regex = new RegExp(character_list);
 	var css_class_obj = {className: css_class_name};
 
 	for (var i=0; i<lines.length; i++) {
