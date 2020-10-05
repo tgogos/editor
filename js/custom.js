@@ -832,6 +832,18 @@ function mark_unwanted_text() {
 
 
 function mark_punctuation_text() {
+	// U+0009 : <control> CHARACTER TABULATION [TAB] {horizontal tabulation (HT)}
+	// U+002E : FULL STOP {period, dot, decimal point}
+	// U+002C : COMMA {decimal separator}
+	// U+2019 : RIGHT SINGLE QUOTATION MARK {single comma quotation mark}
+	// U+0020 : SPACE [SP]
+	// U+2026 : HORIZONTAL ELLIPSIS {three dot leader}
+	// U+003A : COLON
+	// U+003B : SEMICOLON
+	// U+0021 : EXCLAMATION MARK {factorial; bang}
+	// U+00AB : LEFT-POINTING DOUBLE ANGLE QUOTATION MARK {left guillemet; chevrons (in typography)}
+	// U+00BB : RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK {right guillemet}
+	// U+002D : HYPHEN-MINUS {hyphen or minus sign}
 	mark_(regex_punctuation, char_class_punctuation);
 }
 
