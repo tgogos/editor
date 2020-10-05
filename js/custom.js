@@ -1,25 +1,57 @@
-var cm = null; // codemirror
-var doc_str = null;
-var greek_extended_markers = [];
-var mark_greek_extended = true;
-
-var greek_coptic_markers = [];
-var mark_greek_coptic = true;
-
-var number_markers = [];
-var mark_numbers = true;
-
-var latin_red_markers = [];
-var mark_latin_red = true;
-
-var unwanted_markers = [];
-var mark_unwanted = true;
-
-var punctuation_markers = [];
-var mark_punctuation = true;
-
+// -------------------------------------------        Settings        -------------------------------------------
+var cm        = null; // codemirror
+var doc_str   = null;
 var word_wrap = true;
 var font_size = 14;
+
+
+// ------------------------------------------- Character Highlighting -------------------------------------------
+
+// arrays used for storing character highlighting (marking) set to code mirror
+var greek_extended_markers = [];
+var greek_coptic_markers   = [];
+var number_markers         = [];
+var latin_markers      = [];
+var unwanted_markers       = [];
+var punctuation_markers    = [];
+
+// UI settings (checkboxes) start by default true
+var mark_greek_extended = true;
+var mark_greek_coptic   = true;
+var mark_numbers        = true;
+var mark_latin_red      = true;
+var mark_unwanted       = true;
+var mark_punctuation    = true;
+
+// Character lists to be used with the highlighting function: mark()
+// var char_list_punctuation    = "\t|\.|\,|\’| |…|:|;|!|«|»|-";
+// var char_list_greek_extended = "[\\u1F00-\\u1FFF]";
+// var char_list_greek_coptic   = "[\\u0370-\\u03FF]";
+// var char_list_numbers        = "[\\u0028-\\u002b]|[\\u002f-\\u0039]";
+// var char_list_latin          = "[\\u003C-\\u007F]";
+// var char_list_unwanted       = "'\"|\'|\/|µ|∆|·|˙|΄|᾽|ι|᾿|῀|῁|῍|῎|῏|῝|῞|῟|῭|΅|`|´|῾|\‘|“|”|ʼ|ʽ";
+
+// Regular Expression Objects to be used with the highlighting function: mark()
+const regex_punctuation    = /\t|\.|\,|\’| |…|:|;|!|«|»|-/g;
+const regex_greek_extended = /[\u1F00-\u1FFF]/g;
+const regex_greek_coptic   = /[\u0370-\u03FF]/g;
+const regex_numbers        = /[\u0028-\u002b]|[\u002f-\u0039]/g;
+const regex_latin          = /[\u003C-\u007F]/g;
+const regex_unwanted       = /\"|\'|\/|µ|∆|·|˙|΄|᾽|ι|᾿|῀|῁|῍|῎|῏|῝|῞|῟|῭|΅|`|´|῾|\‘|“|”|ʼ|ʽ/g;
+
+
+// string values of CSS class names for highlighting characters
+var char_class_punctuation = "punctuation";
+var char_class_gr_ext      = "gr-ext";
+var char_class_gr_coptic   = "gr-coptic";
+var char_class_numbers     = "num";
+var char_class_latin       = "latin";
+var char_class_unwanted    = "unwanted";
+
+// ------------------------------------------- - - - - - - - - - - - - ------------------------------------------
+
+
+
 
 
 $(document).ready(function(){
@@ -47,8 +79,8 @@ $(document).ready(function(){
 			mark_numbers_text();
 		}
 		if (mark_latin_red) {
-			clear_latin_red_markers();
-			mark_latin_text_red();
+			clear_latin_markers();
+			mark_latin_text();
 		}
 		if (mark_punctuation) {
 			clear_punctuation_markers();
@@ -540,6 +572,8 @@ $(document).ready(function(){
 		mark_greek_extended = this.checked;
 		if (mark_greek_extended) {
 			mark_greek_extended_text();
+			// mark(char_list_greek_extended, char_class_gr_ext, greek_extended_markers);
+			// mark_(regex_greek_extended, char_class_gr_ext);
 		} else {
 			clear_greek_extended_markers();
 		}
@@ -593,6 +627,8 @@ $(document).ready(function(){
 		mark_greek_coptic = this.checked;
 		if (mark_greek_coptic) {
 			mark_greek_coptic_text();
+			// mark(char_list_greek_coptic,char_class_gr_coptic, greek_coptic_markers);
+			// mark_(regex_greek_coptic,char_class_gr_coptic);
 		} else {
 			clear_greek_coptic_markers();
 		}
@@ -616,6 +652,8 @@ $(document).ready(function(){
 		mark_numbers = this.checked;
 		if (mark_numbers) {
 			mark_numbers_text();
+			// mark(char_list_numbers, char_class_numbers, number_markers);
+			// mark_(regex_numbers, char_class_numbers);
 		} else {
 			clear_number_markers();
 		}
@@ -637,9 +675,11 @@ $(document).ready(function(){
 		event.stopPropagation();
 		mark_latin_red = this.checked;
 		if (mark_latin_red) {
-			mark_latin_text_red();
+			mark_latin_text();
+			// mark(char_list_latin, char_class_latin, latin_markers);
+			// mark_(regex_latin, char_class_latin);
 		} else {
-			clear_latin_red_markers();
+			clear_latin_markers();
 		}
 
 	});
@@ -660,6 +700,8 @@ $(document).ready(function(){
 		mark_unwanted = this.checked;
 		if (mark_unwanted) {
 			mark_unwanted_text();
+			// mark(char_list_unwanted, char_class_unwanted, unwanted_markers);
+			// mark_(regex_unwanted, char_class_unwanted);
 		} else {
 			clear_unwanted_markers();
 		}
@@ -682,6 +724,8 @@ $(document).ready(function(){
 		mark_punctuation = this.checked;
 		if (mark_punctuation) {
 			mark_punctuation_text();
+			// mark(char_list_punctuation, char_class_punctuation, punctuation_markers);
+			// mark_(regex_punctuation, char_class_punctuation);
 		} else {
 			clear_punctuation_markers();
 		}
@@ -726,8 +770,8 @@ function clear_number_markers() {
 	number_markers.forEach(marker => marker.clear());
 }
 
-function clear_latin_red_markers() {
-	latin_red_markers.forEach(marker => marker.clear());
+function clear_latin_markers() {
+	latin_markers.forEach(marker => marker.clear());
 }
 
 function clear_unwanted_markers() {
@@ -740,183 +784,197 @@ function clear_punctuation_markers() {
 
 
 
+// deprecated, to be deleted
+// function mark_greek_extended_text() {
+// 	doc_str = cm.getDoc().getValue();
+// 	var lines = doc_str.split('\n');
+// 	var from = {line:0,ch:0};
+// 	var to   = {line:0,ch:0};
+// 	var matched_char_positions = [];
 
+// 	for (var i=0; i<lines.length; i++) {
+// 		from.line = i;
+// 		from.ch   = 0;
+// 		to.line   = i;
+// 		to.ch     = 0;
+// 		matched_char_positions = [];
+
+
+// 		for (var j=0; j<lines[i].length; j++) {
+			
+// 			if (lines[i][j].match(/[\u1F00-\u1FFF]/g) != null) {
+
+// 				matched_char_positions.push(j);
+
+// 			} else {
+// 				if (matched_char_positions.length == 0) {
+// 					continue;
+// 				} else {
+// 					from.ch = matched_char_positions[0];
+// 					to.ch   = matched_char_positions[0] + matched_char_positions.length;
+// 					greek_extended_markers.push(cm.markText(from,to,{className: "gr-ext"}));
+// 					matched_char_positions = [];
+// 				}
+// 			}
+
+// 			if (j==lines[i].length-1) {
+// 				from.ch = matched_char_positions[0];
+// 				to.ch   = matched_char_positions[0] + matched_char_positions.length;
+// 				greek_extended_markers.push(cm.markText(from,to,{className: "gr-ext"}));
+// 				matched_char_positions = [];
+// 			}
+// 		}
+// 	}
+// }
 function mark_greek_extended_text() {
-	doc_str = cm.getDoc().getValue();
-	var lines = doc_str.split('\n');
-	var from = {line:0,ch:0};
-	var to   = {line:0,ch:0};
-	var matched_char_positions = [];
-
-	for (var i=0; i<lines.length; i++) {
-		from.line = i;
-		from.ch   = 0;
-		to.line   = i;
-		to.ch     = 0;
-		matched_char_positions = [];
-
-
-		for (var j=0; j<lines[i].length; j++) {
-			
-			if (lines[i][j].match(/[\u1F00-\u1FFF]/g) != null) {
-
-				matched_char_positions.push(j);
-
-			} else {
-				if (matched_char_positions.length == 0) {
-					continue;
-				} else {
-					from.ch = matched_char_positions[0];
-					to.ch   = matched_char_positions[0] + matched_char_positions.length;
-					greek_extended_markers.push(cm.markText(from,to,{className: "gr-ext"}));
-					matched_char_positions = [];
-				}
-			}
-
-			if (j==lines[i].length-1) {
-				from.ch = matched_char_positions[0];
-				to.ch   = matched_char_positions[0] + matched_char_positions.length;
-				greek_extended_markers.push(cm.markText(from,to,{className: "gr-ext"}));
-				matched_char_positions = [];
-			}
-		}
-	}
+	mark_(regex_greek_extended, char_class_gr_ext);
 }
 
 
 
 
+// deprecated, to be removed
+// function mark_greek_coptic_text() {
+// 	doc_str = cm.getDoc().getValue();
+// 	var lines = doc_str.split('\n');
+// 	var from = {line:0,ch:0};
+// 	var to   = {line:0,ch:0};
+// 	var matched_char_positions = [];
 
+// 	for (var i=0; i<lines.length; i++) {
+// 		from.line = i;
+// 		from.ch   = 0;
+// 		to.line   = i;
+// 		to.ch     = 0;
+// 		matched_char_positions = [];
+
+
+// 		for (var j=0; j<lines[i].length; j++) {
+			
+// 			if (lines[i][j].match(/[\u0370-\u03FF]/g) != null) {
+
+// 				matched_char_positions.push(j);
+
+// 			} else {
+// 				if (matched_char_positions.length == 0) {
+// 					continue;
+// 				} else {
+// 					from.ch = matched_char_positions[0];
+// 					to.ch   = matched_char_positions[0] + matched_char_positions.length;
+// 					greek_coptic_markers.push(cm.markText(from,to,{className: "gr-coptic"}));
+// 					matched_char_positions = [];
+// 				}
+// 			}
+
+// 			if (j==lines[i].length-1) {
+// 				from.ch = matched_char_positions[0];
+// 				to.ch   = matched_char_positions[0] + matched_char_positions.length;
+// 				greek_coptic_markers.push(cm.markText(from,to,{className: "gr-coptic"}));
+// 				matched_char_positions = [];
+// 			}
+// 		}
+// 	}
+// }
 function mark_greek_coptic_text() {
-	doc_str = cm.getDoc().getValue();
-	var lines = doc_str.split('\n');
-	var from = {line:0,ch:0};
-	var to   = {line:0,ch:0};
-	var matched_char_positions = [];
-
-	for (var i=0; i<lines.length; i++) {
-		from.line = i;
-		from.ch   = 0;
-		to.line   = i;
-		to.ch     = 0;
-		matched_char_positions = [];
-
-
-		for (var j=0; j<lines[i].length; j++) {
-			
-			if (lines[i][j].match(/[\u0370-\u03FF]/g) != null) {
-
-				matched_char_positions.push(j);
-
-			} else {
-				if (matched_char_positions.length == 0) {
-					continue;
-				} else {
-					from.ch = matched_char_positions[0];
-					to.ch   = matched_char_positions[0] + matched_char_positions.length;
-					greek_coptic_markers.push(cm.markText(from,to,{className: "gr-coptic"}));
-					matched_char_positions = [];
-				}
-			}
-
-			if (j==lines[i].length-1) {
-				from.ch = matched_char_positions[0];
-				to.ch   = matched_char_positions[0] + matched_char_positions.length;
-				greek_coptic_markers.push(cm.markText(from,to,{className: "gr-coptic"}));
-				matched_char_positions = [];
-			}
-		}
-	}
+	mark_(regex_greek_coptic,char_class_gr_coptic);
 }
 
 
 
 
+// deprecated, to be removed
+// function mark_numbers_text() {
+// 	doc_str = cm.getDoc().getValue();
+// 	var lines = doc_str.split('\n');
+// 	var from = {line:0,ch:0};
+// 	var to   = {line:0,ch:0};
+// 	var matched_char_positions = [];
+
+// 	for (var i=0; i<lines.length; i++) {
+// 		from.line = i;
+// 		from.ch   = 0;
+// 		to.line   = i;
+// 		to.ch     = 0;
+// 		matched_char_positions = [];
+
+
+// 		for (var j=0; j<lines[i].length; j++) {
+
+// 			if (lines[i][j].match(/[\u0028-\u002b]|[\u002f-\u0039]/g) != null) {
+
+// 				matched_char_positions.push(j);
+
+// 			} else {
+// 				if (matched_char_positions.length == 0) {
+// 					continue;
+// 				} else {
+// 					from.ch = matched_char_positions[0];
+// 					to.ch   = matched_char_positions[0] + matched_char_positions.length;
+// 					number_markers.push(cm.markText(from,to,{className: "num"}));
+// 					matched_char_positions = [];
+// 				}
+// 			}
+
+// 			if (j==lines[i].length-1) {
+// 				from.ch = matched_char_positions[0];
+// 				to.ch   = matched_char_positions[0] + matched_char_positions.length;
+// 				number_markers.push(cm.markText(from,to,{className: "num"}));
+// 				matched_char_positions = [];
+// 			}
+// 		}
+// 	}
+// }
 function mark_numbers_text() {
-	doc_str = cm.getDoc().getValue();
-	var lines = doc_str.split('\n');
-	var from = {line:0,ch:0};
-	var to   = {line:0,ch:0};
-	var matched_char_positions = [];
-
-	for (var i=0; i<lines.length; i++) {
-		from.line = i;
-		from.ch   = 0;
-		to.line   = i;
-		to.ch     = 0;
-		matched_char_positions = [];
-
-
-		for (var j=0; j<lines[i].length; j++) {
-
-			if (lines[i][j].match(/[\u0028-\u002b]|[\u002f-\u0039]/g) != null) {
-
-				matched_char_positions.push(j);
-
-			} else {
-				if (matched_char_positions.length == 0) {
-					continue;
-				} else {
-					from.ch = matched_char_positions[0];
-					to.ch   = matched_char_positions[0] + matched_char_positions.length;
-					number_markers.push(cm.markText(from,to,{className: "num"}));
-					matched_char_positions = [];
-				}
-			}
-
-			if (j==lines[i].length-1) {
-				from.ch = matched_char_positions[0];
-				to.ch   = matched_char_positions[0] + matched_char_positions.length;
-				number_markers.push(cm.markText(from,to,{className: "num"}));
-				matched_char_positions = [];
-			}
-		}
-	}
+	mark_(regex_numbers, char_class_numbers);
 }
 
 
 
 
-function mark_latin_text_red() {
-	doc_str = cm.getDoc().getValue();
-	var lines = doc_str.split('\n');
-	var from = {line:0,ch:0};
-	var to   = {line:0,ch:0};
-	var matched_char_positions = [];
+// deprecated, to be removed
+// function mark_latin_text_red() {
+// 	doc_str = cm.getDoc().getValue();
+// 	var lines = doc_str.split('\n');
+// 	var from = {line:0,ch:0};
+// 	var to   = {line:0,ch:0};
+// 	var matched_char_positions = [];
 
-	for (var i=0; i<lines.length; i++) {
-		from.line = i;
-		from.ch   = 0;
-		to.line   = i;
-		to.ch     = 0;
-		matched_char_positions = [];
+// 	for (var i=0; i<lines.length; i++) {
+// 		from.line = i;
+// 		from.ch   = 0;
+// 		to.line   = i;
+// 		to.ch     = 0;
+// 		matched_char_positions = [];
 
 
-		for (var j=0; j<lines[i].length; j++) {
+// 		for (var j=0; j<lines[i].length; j++) {
 			
-			if (lines[i][j].match(/[\u003C-\u007F]/g) != null) {
+// 			if (lines[i][j].match(/[\u003C-\u007F]/g) != null) {
 
-				matched_char_positions.push(j);
+// 				matched_char_positions.push(j);
 
-			} else {
-				if (matched_char_positions.length == 0) {
-					continue;
-				} else {
-					from.ch = matched_char_positions[0];
-					to.ch   = matched_char_positions[0] + matched_char_positions.length;
-					latin_red_markers.push(cm.markText(from,to,{className: "latin-red"}));
-					matched_char_positions = [];
-				}
-			}
+// 			} else {
+// 				if (matched_char_positions.length == 0) {
+// 					continue;
+// 				} else {
+// 					from.ch = matched_char_positions[0];
+// 					to.ch   = matched_char_positions[0] + matched_char_positions.length;
+// 					latin_markers.push(cm.markText(from,to,{className: "latin"}));
+// 					matched_char_positions = [];
+// 				}
+// 			}
 
-			if (j==lines[i].length-1) {
-				from.ch = matched_char_positions[0];
-				to.ch   = matched_char_positions[0] + matched_char_positions.length;
-				latin_red_markers.push(cm.markText(from,to,{className: "latin-red"}));
-				matched_char_positions = [];
-			}
-		}
-	}
+// 			if (j==lines[i].length-1) {
+// 				from.ch = matched_char_positions[0];
+// 				to.ch   = matched_char_positions[0] + matched_char_positions.length;
+// 				latin_markers.push(cm.markText(from,to,{className: "latin"}));
+// 				matched_char_positions = [];
+// 			}
+// 		}
+// 	}
+// }
+function mark_latin_text() {
+	mark_(regex_latin, char_class_latin);
 }
 
 
@@ -924,102 +982,209 @@ function mark_latin_text_red() {
 
 
 
+// deprecated, to be removed
+// function mark_unwanted_text() {
+// 	doc_str = cm.getDoc().getValue();
+// 	var lines = doc_str.split('\n');
+// 	var from = {line:0,ch:0};
+// 	var to   = {line:0,ch:0};
+// 	var matched_char_positions = [];
+
+// 	for (var i=0; i<lines.length; i++) {
+// 		from.line = i;
+// 		from.ch   = 0;
+// 		to.line   = i;
+// 		to.ch     = 0;
+// 		matched_char_positions = [];
+
+
+// 		for (var j=0; j<lines[i].length; j++) {
+
+// 			// BASIC LATIN
+// 			// " : U+0022 Quotation Mark
+// 			// ' : U+0027 APOSTROPHE {APL quote}
+// 			// / : U+002F Solidus
+
+// 			// LATIN-1 SUPPLEMENT
+// 			// µ : U+00B5 Micro Sign
+// 			// · : U+00B7 Middle Dot
+
+// 			// SPACING MODIFIER LETTERS
+// 			// ˙ : U+02D9 Dot Above
+
+// 			// GREEK AND COPTIC
+// 			// ΄ : U+0384 Greek Tonos
+
+// 			// GREEK EXTENDED 
+// 			// ᾽ : U+1FBD Greek Koronis
+// 			// ι : U+1FBE Greek Prosgegrammeni
+// 			// ᾿ : U+1FBF Greek Psili
+// 			// ῀ : U+1FC0 Greek Perispomeni
+// 			// ῁ : U+1FC1 Greek Dialytika and Perispomeni
+// 			// ῍ : U+1FCD Greek Psili and Varia
+// 			// ῎ : U+1FCE Greek Psili and Oxia
+// 			// ῏ : U+1FCF Greek Psili and Perispomeni
+// 			// ῝ : U+1FDD Greek Dasia and Varia
+// 			// ῞ : U+1FDE Greek Dasia and Oxia
+// 			// ῟ : U+1FDF Greek Dasia and Perispomeni
+// 			// ῭ : U+1FED Greek Dialytika and Varia
+// 			// ΅ : U+1FEE Greek Dialytika and Oxia
+// 			// ` : U+1FEF Greek Varia
+// 			// ´ : U+1FFD Greek Oxia
+// 			// ῾ : U+1FFE Greek Dasia
+
+// 			// GENERAL PUNCTUATION
+// 			// ‘ : U+2018 Left Single Quotation Mark
+// 			// ’ : U+2019 Right Single Quotation Mark
+// 			// “ : U+201C Left Double Quotation Mark
+// 			// ” : U+201D Right Double Quotation Mark
+
+// 			// IPA EXTENSIONS
+// 			// ʼ : U+02BC Modifier Letter Apostrophe
+// 			// ʽ : U+02BD Modifier Letter Reversed Comma
+			
+// 			if (lines[i][j].match(/\"|\'|\/|µ|∆|·|˙|΄|᾽|ι|᾿|῀|῁|῍|῎|῏|῝|῞|῟|῭|΅|`|´|῾|\‘|“|”|ʼ|ʽ/g) != null) {
+
+// 				matched_char_positions.push(j);
+
+// 			} else {
+// 				if (matched_char_positions.length == 0) {
+// 					continue;
+// 				} else {
+// 					from.ch = matched_char_positions[0];
+// 					to.ch   = matched_char_positions[0] + matched_char_positions.length;
+// 					unwanted_markers.push(cm.markText(from,to,{className: "unwanted"}));
+// 					matched_char_positions = [];
+// 				}
+// 			}
+
+// 			if (j==lines[i].length-1) {
+// 				from.ch = matched_char_positions[0];
+// 				to.ch   = matched_char_positions[0] + matched_char_positions.length;
+// 				unwanted_markers.push(cm.markText(from,to,{className: "unwanted"}));
+// 				matched_char_positions = [];
+// 			}
+// 		}
+// 	}
+// }
 function mark_unwanted_text() {
-	doc_str = cm.getDoc().getValue();
-	var lines = doc_str.split('\n');
-	var from = {line:0,ch:0};
-	var to   = {line:0,ch:0};
-	var matched_char_positions = [];
-
-	for (var i=0; i<lines.length; i++) {
-		from.line = i;
-		from.ch   = 0;
-		to.line   = i;
-		to.ch     = 0;
-		matched_char_positions = [];
-
-
-		for (var j=0; j<lines[i].length; j++) {
-
-			// BASIC LATIN
-			// " : U+0022 Quotation Mark
-			// ' : U+0027 APOSTROPHE {APL quote}
-			// / : U+002F Solidus
-
-			// LATIN-1 SUPPLEMENT
-			// µ : U+00B5 Micro Sign
-			// · : U+00B7 Middle Dot
-
-			// SPACING MODIFIER LETTERS
-			// ˙ : U+02D9 Dot Above
-
-			// GREEK AND COPTIC
-			// ΄ : U+0384 Greek Tonos
-
-			// GREEK EXTENDED 
-			// ᾽ : U+1FBD Greek Koronis
-			// ι : U+1FBE Greek Prosgegrammeni
-			// ᾿ : U+1FBF Greek Psili
-			// ῀ : U+1FC0 Greek Perispomeni
-			// ῁ : U+1FC1 Greek Dialytika and Perispomeni
-			// ῍ : U+1FCD Greek Psili and Varia
-			// ῎ : U+1FCE Greek Psili and Oxia
-			// ῏ : U+1FCF Greek Psili and Perispomeni
-			// ῝ : U+1FDD Greek Dasia and Varia
-			// ῞ : U+1FDE Greek Dasia and Oxia
-			// ῟ : U+1FDF Greek Dasia and Perispomeni
-			// ῭ : U+1FED Greek Dialytika and Varia
-			// ΅ : U+1FEE Greek Dialytika and Oxia
-			// ` : U+1FEF Greek Varia
-			// ´ : U+1FFD Greek Oxia
-			// ῾ : U+1FFE Greek Dasia
-
-			// GENERAL PUNCTUATION
-			// ‘ : U+2018 Left Single Quotation Mark
-			// ’ : U+2019 Right Single Quotation Mark
-			// “ : U+201C Left Double Quotation Mark
-			// ” : U+201D Right Double Quotation Mark
-
-			// IPA EXTENSIONS
-			// ʼ : U+02BC Modifier Letter Apostrophe
-			// ʽ : U+02BD Modifier Letter Reversed Comma
-			
-			if (lines[i][j].match(/\"|\'|\/|µ|∆|·|˙|΄|᾽|ι|᾿|῀|῁|῍|῎|῏|῝|῞|῟|῭|΅|`|´|῾|\‘|“|”|ʼ|ʽ/g) != null) {
-
-				matched_char_positions.push(j);
-
-			} else {
-				if (matched_char_positions.length == 0) {
-					continue;
-				} else {
-					from.ch = matched_char_positions[0];
-					to.ch   = matched_char_positions[0] + matched_char_positions.length;
-					unwanted_markers.push(cm.markText(from,to,{className: "unwanted"}));
-					matched_char_positions = [];
-				}
-			}
-
-			if (j==lines[i].length-1) {
-				from.ch = matched_char_positions[0];
-				to.ch   = matched_char_positions[0] + matched_char_positions.length;
-				unwanted_markers.push(cm.markText(from,to,{className: "unwanted"}));
-				matched_char_positions = [];
-			}
-		}
-	}
+	mark_(regex_unwanted, char_class_unwanted);
 }
 
 
 
 
+// deprecated, to be deleted
+// function mark_punctuation_text() {
+// 	doc_str = cm.getDoc().getValue();
+// 	var lines = doc_str.split('\n');
+// 	var from = {line:0,ch:0};
+// 	var to   = {line:0,ch:0};
+// 	var matched_char_positions = [];
+
+// 	for (var i=0; i<lines.length; i++) {
+// 		from.line = i;
+// 		from.ch   = 0;
+// 		to.line   = i;
+// 		to.ch     = 0;
+// 		matched_char_positions = [];
+
+
+// 		for (var j=0; j<lines[i].length; j++) {
+
+// 			// CONTROL CHARACTERS
+// 			// \t : U+0009 Horizontal Tabulation
+			
+// 			if (lines[i][j].match(/\t|\.|\,|\’| |…|:|;|;|!|«|»|-/g) != null) {
+
+// 				matched_char_positions.push(j);
+
+// 			} else {
+// 				if (matched_char_positions.length == 0) {
+// 					continue;
+// 				} else {
+// 					from.ch = matched_char_positions[0];
+// 					to.ch   = matched_char_positions[0] + matched_char_positions.length;
+// 					punctuation_markers.push(cm.markText(from,to,{className: "punctuation"}));
+// 					matched_char_positions = [];
+// 				}
+// 			}
+
+// 			if (j==lines[i].length-1) {
+// 				from.ch = matched_char_positions[0];
+// 				to.ch   = matched_char_positions[0] + matched_char_positions.length;
+// 				punctuation_markers.push(cm.markText(from,to,{className: "punctuation"}));
+// 				matched_char_positions = [];
+// 			}
+// 		}
+// 	}
+// }
 function mark_punctuation_text() {
+	mark_(regex_punctuation, char_class_punctuation);
+}
+
+
+// function that scans the whole text and adds color when needed.
+// character_list must be a string,
+// valid regex, in order to be used with javascript function: RegExp()
+// 
+// function mark(character_list, css_class_name) {
+// 	doc_str = cm.getDoc().getValue();
+// 	var lines = doc_str.split('\n');
+// 	var from = {line:0,ch:0};
+// 	var to   = {line:0,ch:0};
+// 	var matched_char_positions = [];
+
+// 	var regex = new RegExp(character_list,'g');
+// 	var css_class_obj = {className: css_class_name};
+
+// 	for (var i=0; i<lines.length; i++) { // iterate lines
+// 		// from.line = i;
+// 		from.ch   = 0;
+// 		// to.line   = i;
+// 		to.ch     = 0;
+// 		matched_char_positions = [];
+
+
+// 		for (var j=0; j<lines[i].length; j++) { // iterate columns
+			
+// 			if (lines[i][j].match(regex) != null) {
+
+// 				matched_char_positions.push(j);
+
+// 			} else {
+// 				if (matched_char_positions.length == 0) {
+// 					continue;
+// 				} else {
+// 					from.ch = matched_char_positions[0];
+// 					to.ch   = matched_char_positions[0] + matched_char_positions.length;
+// 					markers_array.push(cm.markText(from,to,css_class_obj));
+// 					matched_char_positions = [];
+// 				}
+// 			}
+
+// 			if (j==lines[i].length-1) {
+// 				from.ch = matched_char_positions[0];
+// 				to.ch   = matched_char_positions[0] + matched_char_positions.length;
+// 				markers_array.push(cm.markText(from,to,css_class_obj));
+// 				matched_char_positions = [];
+// 			}
+// 		}
+// 	}
+// }
+
+
+
+function mark_(regex, css_class_name) {
 	doc_str = cm.getDoc().getValue();
 	var lines = doc_str.split('\n');
 	var from = {line:0,ch:0};
 	var to   = {line:0,ch:0};
 	var matched_char_positions = [];
 
-	for (var i=0; i<lines.length; i++) {
+	var css_class_obj = {className: css_class_name};
+
+	for (var i=0; i<lines.length; i++) { // iterate lines
 		from.line = i;
 		from.ch   = 0;
 		to.line   = i;
@@ -1027,12 +1192,9 @@ function mark_punctuation_text() {
 		matched_char_positions = [];
 
 
-		for (var j=0; j<lines[i].length; j++) {
-
-			// CONTROL CHARACTERS
-			// \t : U+0009 Horizontal Tabulation
+		for (var j=0; j<lines[i].length; j++) { // iterate columns
 			
-			if (lines[i][j].match(/\t|\.|\,|\’| |…|:|;|;|!|«|»|-/g) != null) {
+			if (lines[i][j].match(regex) != null) {
 
 				matched_char_positions.push(j);
 
@@ -1042,7 +1204,28 @@ function mark_punctuation_text() {
 				} else {
 					from.ch = matched_char_positions[0];
 					to.ch   = matched_char_positions[0] + matched_char_positions.length;
-					punctuation_markers.push(cm.markText(from,to,{className: "punctuation"}));
+					switch (css_class_name) {
+					  case 'gr-ext':
+					    greek_extended_markers.push(cm.markText(from,to,css_class_obj));
+					    break;
+					  case 'gr-coptic':
+					    greek_coptic_markers.push(cm.markText(from,to,css_class_obj));
+					    break;
+					  case 'num':
+					    number_markers.push(cm.markText(from,to,css_class_obj));
+					    break;
+					  case 'latin':
+					    latin_markers.push(cm.markText(from,to,css_class_obj));
+					    break;
+					  case 'unwanted':
+					    unwanted_markers.push(cm.markText(from,to,css_class_obj));
+					    break;
+					  case 'punctuation':
+					    punctuation_markers.push(cm.markText(from,to,css_class_obj));
+					    break;
+					  default:
+					    break;
+					}
 					matched_char_positions = [];
 				}
 			}
@@ -1050,7 +1233,28 @@ function mark_punctuation_text() {
 			if (j==lines[i].length-1) {
 				from.ch = matched_char_positions[0];
 				to.ch   = matched_char_positions[0] + matched_char_positions.length;
-				punctuation_markers.push(cm.markText(from,to,{className: "punctuation"}));
+				switch (css_class_name) {
+				  case 'gr-ext':
+				    greek_extended_markers.push(cm.markText(from,to,css_class_obj));
+				    break;
+				  case 'gr-coptic':
+				    greek_coptic_markers.push(cm.markText(from,to,css_class_obj));
+				    break;
+				  case 'num':
+				    number_markers.push(cm.markText(from,to,css_class_obj));
+				    break;
+				  case 'latin':
+				    latin_markers.push(cm.markText(from,to,css_class_obj));
+				    break;
+				  case 'unwanted':
+				    unwanted_markers.push(cm.markText(from,to,css_class_obj));
+				    break;
+				  case 'punctuation':
+				    punctuation_markers.push(cm.markText(from,to,css_class_obj));
+				    break;
+				  default:
+				    break;
+				}
 				matched_char_positions = [];
 			}
 		}

@@ -4,7 +4,7 @@ html, body {height: 100%; position: relative;}
 .gr-ext {background-color: #fff34f; color: #5a571c;}
 .gr-coptic {background-color: #a9e287; color: #2f670e;}
 .num {background-color: #ffc107; color: #7d5f05;}
-.latin-red {background-color: #f3435b; color: #77111f;}
+.latin {background-color: #f3435b; color: #77111f;}
 .unwanted {background-color: #f3435b; color: #77111f;}
 .punctuation {background-color: #dbf5cb; color:#2f670e;}
 
