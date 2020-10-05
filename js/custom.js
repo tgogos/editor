@@ -85,7 +85,10 @@ $(document).ready(function(){
 		}
 	});
 
-	// add button listeners
+
+
+// ------------------------------------------- Button Listeners ("Polytonic" section) -------------------------------------------
+
 	$(".btn-rp-daseia-psili").on('click',function(event){
 		event.preventDefault();
 		doc_str = cm.getDoc().getValue();
@@ -332,6 +335,16 @@ $(document).ready(function(){
 
 
 
+	$(".btn-rp-all").on('click',function(event){
+		event.preventDefault();
+		$(".btn-rp-daseia-psili").trigger('click');
+		$(".btn-rp-daseia-psili-tonos").trigger('click');
+		$(".btn-rp-n-grams").trigger('click');
+	});
+
+
+
+// ------------------------------------------- Button Listeners ("Fix" section) -------------------------------------------
 
 	$(".btn-fix-single-quotes").on('click',function(event){
 		event.preventDefault();
@@ -498,6 +511,19 @@ $(document).ready(function(){
 	$(".btn-fix-spaces").on('click',function(event){
 		event.preventDefault();
 		cm.getDoc().setValue(cm.getDoc().getValue().replace(/( )+/g, ' '));
+	});
+
+
+
+	$(".btn-fix-all").on('click',function(event){
+		event.preventDefault();
+		$(".btn-fix-diacritics").trigger('click');
+		$(".btn-fix-single-quotes").trigger('click');
+		$(".btn-fix-math-symbols").trigger('click');
+		$(".btn-fix-psili").trigger('click');
+		$(".btn-fix-ano-teleia").trigger('click');
+		$(".btn-fix-latin-greek").trigger('click');
+		$(".btn-fix-spaces").trigger('click');
 	});
 
 
