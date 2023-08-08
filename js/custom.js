@@ -514,6 +514,11 @@ $(document).ready(function(){
 	});
 
 
+	$(".btn-fix-spaces-newline").on('click',function(event){
+		event.preventDefault();
+		cm.getDoc().setValue(cm.getDoc().getValue().replace(/( )+\n/g, '\n').trim());
+	});
+
 
 	$(".btn-fix-all").on('click',function(event){
 		event.preventDefault();
@@ -524,6 +529,7 @@ $(document).ready(function(){
 		$(".btn-fix-ano-teleia").trigger('click');
 		$(".btn-fix-latin-greek").trigger('click');
 		$(".btn-fix-spaces").trigger('click');
+		$(".btn-fix-spaces-newline").trigger('click');
 	});
 
 
