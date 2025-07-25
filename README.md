@@ -12,15 +12,15 @@ The idea was to copy-paste a piece of text and "visually" be able to check if th
 
 The big number of badly-used characters also led us to the creation of functions that do batch replacements/fixes, so there you have it!
 
+## Short demo
+
+![](demo.gif)
+
 ## Confusables...
 
 In 2025, I bumped into the term "confusables", which describes part of the problem that we were trying to solve. Unicode.org provides a relative utility here: [Unicode Utilities: Confusables](https://util.unicode.org/UnicodeJsps/confusables.jsp) 
 
 >*Confusable characters are those that may be confused with others (in some common UI fonts), such as the Latin letter "o" and the Greek letter omicron "ο". Fonts make a difference: for example, the Hebrew character "ס" looks confusingly similar to "o" in some fonts (such as Arial Hebrew), but not in others. See also unaccented [Latin Characters.](https://util.unicode.org/UnicodeJsps/list-unicodeset.jsp?\p{latin}-\p{nfkdqc%3Dn}). The data for confusables and restrictions is from UTS39.*
-
-## Short demo
-
-![](demo.gif)
 
 ## Under the hood...
 
